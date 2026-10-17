@@ -1,17 +1,54 @@
 export const studioPreset=[
- {duration:12,title:'Meet Demo Studio',text:'This is Demo Studio. It records a real application screen, adds your narration and captions, and saves a video you can share.',action:'Show Demo Studio’s opening screen. Click Show me how for a guided tour before your first recording.'},
+ {duration:12,title:'Meet Demo Studio',text:'This is Demo Studio. It records a real application screen, adds your narration and captions, and saves a video you can share.',action:'Show Demo Studio’s opening screen. Choose Watch Demo Studio in action for the finished video, or take the quick interface tour.'},
  {duration:14,title:'Start with a simple story',text:'Give your demo a name and choose the app you want to show. A scene is simply what you plan to do, what you plan to say, and how long it takes.',action:'Show the project name and app URL. Expand the scene editor to reveal a narration field and its duration.'},
- {duration:12,title:'Choose how to tell it',text:'You can speak while you record, use a finished voiceover, or make a silent demo. Captions follow the script and timing you set.',action:'Open the Narration step and point out its three options. Do not claim captions transcribe live speech.'},
- {duration:16,title:'Connect the real app',text:'Choose the application tab or window in your browser’s sharing dialog. Check the preview before recording, and hide anything you do not want people to see.',action:'Choose the target app tab. For a Demo Studio demonstration, use a second Demo Studio window to avoid an endless mirrored preview. Review privacy before continuing.'},
- {duration:14,title:'Record at your own pace',text:'Start recording, use your application, and follow your scene notes. Pause when you need a moment. Finish when you are happy with the demonstration.',action:'Show the real Record controls. Only demonstrate Start, Pause and Finish if an actual recording is running.'},
+ {duration:12,title:'Choose how to tell it',text:'Generate a local American voice, speak as you record, or import a voiceover. Generated captions follow the spoken segments.',action:'Open Narration, generate the voice, and listen. Captions do not transcribe live speech.'},
+ {duration:16,title:'Connect the real app',text:'Choose an application tab or import a real screen recording. Check the preview before continuing, and hide anything you do not want people to see.',action:'Choose the target app tab. For a Demo Studio demonstration, use a second Demo Studio window to avoid an endless mirrored preview. Review privacy before continuing.'},
+ {duration:14,title:'Record at your own pace',text:'For imported footage, create the narrated video preview. For live capture, start recording and follow your scene notes. Pause during waits, then finish.',action:'Show the real Record controls. Only demonstrate Start, Pause and Finish if an actual recording is running.'},
  {duration:12,title:'Review, save, repeat',text:'Watch your recording once, then export an MP4. Save the project to reuse your scene plan next time. That is Demo Studio, from working app to shareable demo.',action:'Show a real completed recording and export it. If no recording exists, explain that these controls become available after the first take.'}
 ];
 export const preset=[
- {duration:10,title:'A familiar kitchen. An unfamiliar sound.',text:'Your refrigerator has picked up a new hobby: making mysterious noises. Before you give it a stage name, let’s ask SoHelpMe.',action:'Open SoHelpMe. Keep personal details out of view.'},
- {duration:15,title:'Describe it in your own words',text:'Start with what you actually notice. I’m describing a new rattling sound, when it happens, and whether the refrigerator is still cooling.',action:'Enter: My refrigerator started making an unfamiliar rattling noise. It comes and goes, and it still seems cold. What should I check?'},
- {duration:16,title:'A few useful follow-up questions',text:'Read the questions SoHelpMe actually asks, then answer what you know. You don’t need the technical vocabulary. A clear description is a good place to start.',action:'Submit the problem. Read the real response. Answer its actual questions; don’t force a scripted response.'},
- {duration:19,title:'Turn the response into a next step',text:'Now review the guidance on screen. Look for a practical first check, any safety precautions, and when professional help is recommended. Pause here if you want more time to read.',action:'Show the actual guidance. Narrate only checks that appear in the response. Never demonstrate work on live electrical parts.'},
- {duration:12,title:'A little less mystery',text:'A strange sound, a few useful details, and a clearer idea of what to do next. SoHelpMe. A little help when you need it.',action:'Leave the guidance visible, then let the closing fade finish.'}
+ {
+  "duration": 10,
+  "title": "A mysterious rattle",
+  "action": "Show the actual SoHelpMe opening screen.",
+  "text": "Your refrigerator has picked up a new hobby: percussion. Let's use SoHelpMe to work through an unfamiliar rattle, one observation at a time."
+ },
+ {
+  "duration": 11,
+  "title": "Describe the problem",
+  "action": "Type the refrigerator description into the real application.",
+  "text": "I describe the intermittent rattling and mention that the refrigerator still seems cold. Plain language is enough. I don't need to know the name of a single refrigerator part."
+ },
+ {
+  "duration": 10,
+  "title": "Get help",
+  "action": "Submit Get help and wait for the real response.",
+  "text": "Now I choose Get help. SoHelpMe responds with a practical first check and asks for more information, instead of expecting me to arrive with a diagnosis."
+ },
+ {
+  "duration": 11,
+  "title": "Read the first check",
+  "action": "Keep the actual response readable on screen.",
+  "text": "Here, the response points to items that may be touching or vibrating, and asks what changes the rattle. I can read the suggestion and answer what I actually notice."
+ },
+ {
+  "duration": 11,
+  "title": "Answer with an observation",
+  "action": "Report the example observation about bottles touching, then send.",
+  "text": "For this demonstration, I report that two glass bottles were touching inside the door. Separating them stopped the rattle, and the refrigerator is still cooling normally."
+ },
+ {
+  "duration": 12,
+  "title": "A useful next step",
+  "action": "Show the real follow-up response. Narrate only if the on-screen response matches.",
+  "text": "The follow-up recommends keeping the bottles apart and monitoring whether the sound returns. That's a useful next step for this example, with room to continue if the problem changes."
+ },
+ {
+  "duration": 7,
+  "title": "Closing",
+  "action": "Leave the guidance visible through the closing line.",
+  "text": "A clearer description, a useful question, and a practical next step. SoHelpMe. A little help when you need it."
+ }
 ];
 export function validateScenes(input){if(!Array.isArray(input)||!input.length||input.length>40)throw new Error('Use 1–40 scenes.');return input.map(s=>{const duration=Number(s.duration);if(!Number.isFinite(duration)||duration<2||duration>180)throw new Error('Scene durations must be 2–180 seconds.');return{duration,title:String(s.title||'Scene').slice(0,120),text:String(s.text||'').slice(0,3000),action:String(s.action||'').slice(0,3000)};});}
 export function locateScene(scenes,seconds){let start=0;for(let i=0;i<scenes.length;i++){if(seconds<start+scenes[i].duration)return{index:i,start,elapsed:seconds-start};start+=scenes[i].duration;}return{index:scenes.length-1,start:start-scenes.at(-1).duration,elapsed:scenes.at(-1).duration};}

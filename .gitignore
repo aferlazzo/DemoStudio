@@ -1,4 +1,5 @@
 node_modules/
+.local/
 recordings/
 *.mp4
 *.webm
@@ -12,3 +13,7 @@ recordings/
 *.log
 .DS_Store
 Thumbs.db
+
+!docs/media/*.mp4
+!docs/media/*.srt
+__pycache__/

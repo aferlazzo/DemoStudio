@@ -1,46 +1,51 @@
-# Demo Studio
+# DemoStudio
 
-A reusable local recorder for real applications. It does not edit, inject code into, or deploy SoHelpMe or any captured app. No account, API key, or cloud voice service is needed.
+Make narrated demonstration videos of your real applications. DemoStudio combines genuine footage, a local American voice, and timed captions into a shareable H.264/AAC MP4. No API key, paid voice subscription, or account is needed.
 
-## First time? Watch the tour
-
-Choose **Show me how Demo Studio works** at the top. The tour visits the actual Story, Narration, App preview, Record and Save video screens. It advances every 14 seconds; Pause, Previous and Next let you control the pace. It requests no screen or microphone permissions and does not create a recording. Capture and export remain disabled during the tour. Exit returns to your setup.
-
-The default 80-second scene plan is a demonstration of Demo Studio itself. The **Try the SoHelpMe example** button loads the separate 72-second refrigerator scenario. A finished introductory video remains a roadmap item until an actual recording has been permission-approved, captured and reviewed.
+**[Watch DemoStudio explain itself, then watch its SoHelpMe demo](https://aferlazzo.github.io/DemoStudio/).** Both finished videos can be watched and downloaded without installing anything. DemoStudio itself runs locally; the public page is the video gallery.
 
 ## Start on Windows
 
-Install Node.js 20+ if needed. In File Explorer, double-click **Start Demo Studio.cmd**. The first launch installs the FFmpeg dependency (internet required). The browser opens after the server is ready. Use desktop Chrome or Edge at http://127.0.0.1:4317. Keep the terminal open while using the studio. Do not open `public/index.html` directly: a `file://` address cannot run the studio. That file now displays launcher instructions instead of nonworking controls.
+1. Download this repository using **Code → Download ZIP**, and extract it. Install **Node.js 20 or newer** from [nodejs.org](https://nodejs.org/) if needed.
+2. Double-click **Start Demo Studio.cmd**. First launch downloads the video dependency. Keep its terminal window open.
+3. Open **http://127.0.0.1:4317/** in desktop Chrome, Edge, or the embedded browser. Choose **Watch Demo Studio in action** for the finished walkthrough.
+4. To generate voices, install **Python 3.10–3.12** from [python.org](https://www.python.org/downloads/) if needed. In Narration, choose **Set up narration · one-time download**. Alternatively double-click **Setup Narration.cmd**. Setup downloads roughly 400 MB; allow several minutes and an internet connection.
 
-Alternatively run `npm install`, then `npm start` in this folder. Stop the server with Ctrl+C. It listens only on loopback, not your network.
+Do not open `public/index.html` directly. The app needs its local server. Stop the server with Ctrl+C. Advanced launch: `npm ci`, then `npm start`. The server listens only on this computer.
 
-## Record
+## Make your next video
 
-The studio guides you through five steps. **Story** sets up your app and optional script edits. **Narration** explains microphone, imported voiceover, or silent recording. **App preview** walks you through browser sharing and asks you to check the actual picture. **Record** provides the controls and director’s notes. When recording finishes, **Save video** opens automatically with review and export instructions. Back buttons let you revise setup before recording; navigation is locked while recording is starting or active. Once a recording exists, the Save video step remains accessible. Cropping, privacy masks, scene editing, and picture-size controls are expandable options.
+1. **Story:** name the project and paste your app’s address. Try the SoHelpMe example or load `examples/SoHelpMe.json`. Expand the scene editor to describe what the audience will see and hear. Rehearse the real app first; adjust the script to its actual responses.
+2. **Narration:** choose a voice and pace, then click **Generate narration & captions**. Wait for the audio player and listen. Generation updates scene durations and captions to the actual spoken segments. Changing the script, voice, pace, or duration requires generating again. Microphone, imported voiceover, and silent modes are also available for live capture.
+3. **App preview:** choose a real app tab/window, or import an existing MP4/WebM screen recording. Import works in embedded browsers that cannot share a screen. Check framing and private information. Optional crop controls and fixed privacy masks are available. Tick the preview confirmation.
+4. **Record / Create:** for an imported recording, click **Create narrated video preview**. For live capture, click **Start recording** and perform the real workflow beside the studio. Pause during waits and Finish when ready. Narration and recording pause together. Browser permissions are requested only for live capture.
+5. **Save video:** watch the finished playback, then **Export MP4**. Save captions separately if desired. Return to Story and **Save project** to reuse the script and layout.
 
-1. Load or edit the 72-second SoHelpMe refrigerator example. These are narration prompts, not invented app responses. Edit the narration after a rehearsal so it accurately describes what SoHelpMe really says.
-2. Open your app, then choose its browser tab or window in **Choose a screen**. Selecting a tab avoids capturing browser toolbars. Leave email settings and other personal information closed.
-3. Inspect the live preview. Crop edges or add opaque privacy masks using frame percentages. Masks cover fixed locations; they do not recognize or follow private information. Review all app states you will show.
-4. Choose microphone narration, an imported audio file, or silence. For a warm American narrator, read the script naturally with light humor, or import an already recorded voiceover. Imported narration plays through your speakers; headphones prevent bleed into other recordings. This tool does not generate AI speech.
-5. Click **Start recording**, approve microphone access if requested, and perform the real workflow. Keep the studio visible beside the app, ideally in a separate browser window, to avoid background-tab throttling. Scene notes and the teleprompter remain outside the video. Pause during long waits; the video, imported narration, and scene clock pause together. There is no global keyboard shortcut.
-6. Automatic mode stops at the script’s end. Manual mode can continue longer; captions end when the script does. The opening and scheduled ending fade to black; manual early stops do not add an ending fade.
-7. Review playback, then **Export MP4**. This sends the recording to your local Node server, which uses FFmpeg to produce H.264/AAC MP4. Temporary conversion files are removed afterward. **Save original** is a fallback if conversion fails. Export is limited to 300 MB per recording and five minutes of conversion time.
-8. Save the project JSON to reuse scripts, timing, crop and masks. Audio files and recordings are not stored in project JSON. Save your recording before closing the page; it exists in browser memory until downloaded.
+For ThinkAgain, Waiting Room Buddy, or another app, change the project name, address, and scenes, then repeat. Project JSON saves scripts, settings, crop, masks, and voice choice; it does **not** include video, audio, or generated caption data. Reselect source files and regenerate narration after loading a project.
 
-## Captions and timing
+## Privacy
 
-Captions are burned into the video and can also be saved as SRT. They split each scene’s script across its duration; this is not speech recognition or automatic alignment. Rehearse and edit durations to match your delivery, or use a suitably timed imported voiceover. Set durations to a total of 60–90 seconds for a short demo. Pausing during a sentence may create an audible cut.
+Editing, voice generation, and rendering run on this computer after setup. No app credentials are requested and no recordings are uploaded by DemoStudio. Initial setup downloads dependencies from npm, PyPI, and the model’s official GitHub release. `.local/`, environment files, generated audio, and private recordings are excluded from Git. Only the two reviewed public MP4 examples in `docs/media/` are committed.
 
-## Reuse as a component
+## Practical limits
 
-`public/core.js` exports pure scene/caption helpers. `public/app.js` owns capture, canvas composition, audio mixing and downloads. `public/` is a framework-free frontend; `server.mjs` provides the loopback-only MP4 converter and static server. You can adapt these modules for another local development tool. A remotely hosted version would need a secure conversion backend or a client-side encoder; do not deploy this local conversion server unchanged.
+- Imported recordings require generated narration or an imported voiceover. Microphone and silent modes are for live capture. A short imported source holds its last frame until narration ends; a longer source is cut at the script’s end. There is no timeline editor for rearranging clips.
+- Imported exports use 1280×900: up to 1280×800 for the app and a separate caption area. Playback in step 5 is the final layout; the source preview is for framing. Live captures use the selected 16:9 size with overlaid captions.
+- Captions are burned into the picture and downloadable as SRT. Generated captions use measured speech segments, not word-by-word alignment. Microphone/imported voiceovers use your scene timings; audio is not transcribed.
+- Voice generation can take a few minutes. Media jobs time out after five minutes; use shorter projects on slower computers. Imported files must be under 290 MB; total render uploads under 300 MB; maximum rendered duration is 20 minutes.
+- Screen/microphone access depends on the browser and operating system. Use desktop Chrome/Edge if the embedded browser cannot share a screen. Keep the studio visible beside the app to reduce background throttling. Shared tab audio is browser dependent.
+- Fixed privacy masks cover positions, not moving personal details. Review the entire video before distribution. There is no automatic secret detection/redaction.
+- Save the MP4 before closing or refreshing. Unsaved recordings and narration live in browser memory; there is no crash recovery. Failed jobs show an explanation and leave the project available to retry.
 
-## Limits and privacy
+## Examples and verification
 
-Screen and microphone permissions must be granted by you. Some browser-protected content cannot be captured. Shared tab audio depends on browser, OS and source selection; enable it in the browser picker if desired. Use microphone or imported narration for reliable voice audio. The canvas encodes at 30 fps, but actual frame rate depends on browser scheduling and computer performance. There is no automatic redaction, AI narration, trimming editor or scene-cut editor. Fades apply to the full recording only.
+- **DemoStudio-Demo.mp4:** 114.53 seconds; real project loading, scene editing, voice generation, source import, privacy controls, MP4 export, and resulting SoHelpMe playback. Processing waits are shortened.
+- **SoHelpMe-Demo.mp4:** 68.70 seconds; real refrigerator conversation and replies, local narration, captions, and the requested closing line.
 
-No app credentials are requested. The recorder makes no external requests during normal use; first-run package installation downloads dependencies. Do not record passwords, API keys, email addresses, notifications, or personal data. Privacy masks must be checked by you. Projects may contain whatever private text you put in scripts.
+Watch the [gallery](https://aferlazzo.github.io/DemoStudio/) or local `/demos/` page. [COMPLETION.md](COMPLETION.md) records tests, provenance, and limitations. Run `npm test` for scene/caption helpers, actual FFmpeg conversion, render validation, gallery byte ranges, and origin checks. CI runs on Windows. The voice model is not downloaded in CI.
 
-## Verification
+## Components
 
-Run `npm test` for scene validation, caption timing and export helpers. Screen-sharing and microphone prompts require a human-approved recording in your browser. These cannot be fully exercised by this chat’s available browser tools.
+`public/core.js` supplies scene/caption helpers; `app.js` handles the browser workflow; `guide.js` provides guidance; `narration.js` manages voices. `server.mjs` serves the local app. `media.mjs` handles narration/render jobs; `scripts/narrate.py` runs the local engine. `scripts/setup-speech.ps1` installs optional voice dependencies. `docs/` contains the public video gallery.
+
+Do not deploy the loopback media server as a public service. A hosted editor would need authentication, isolated jobs, storage, and upload limits. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for downloaded tools.

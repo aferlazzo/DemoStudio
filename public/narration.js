@@ -1,0 +1,11 @@
+export function mountNarration({getScenes,setDurations,setBusy,onChange}){
+  const $=id=>document.getElementById(id);let audio=null,cues=null,fingerprint='',previewURL=null;
+  const signature=()=>JSON.stringify({scenes:getScenes().map(s=>({text:s.text,duration:s.duration})),voice:$('voice').value,speed:$('speechSpeed').value});
+  const state={get audio(){return audio;},get cues(){return cues;},valid:()=>Boolean(audio)&&fingerprint===signature()};
+  const showError=e=>{$('voiceStatus').textContent=e.message;};
+  fetch('/narration/status').then(r=>r.json()).then(s=>{$('setupVoice').hidden=s.ready;}).catch(()=>{});
+  $('setupVoice').onclick=async()=>{setBusy(true);$('voiceStatus').textContent='Downloading and setting up local narration. This happens once; keep the app open.';try{const r=await fetch('/narration/setup',{method:'POST'});if(!r.ok)throw new Error(await r.text());$('setupVoice').hidden=true;$('voiceStatus').textContent='Ready. Click Generate narration & captions.';}catch(e){showError(e);}finally{setBusy(false);onChange();}};
+  $('generateVoice').onclick=async()=>{setBusy(true);$('voiceStatus').textContent='Generating narration and timing captions locally… This may take a few minutes.';try{const response=await fetch('/narration',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({scenes:getScenes(),voice:$('voice').value,speed:Number($('speechSpeed').value)})});if(!response.ok)throw new Error(await response.text());const result=await response.json();audio=new Blob([Uint8Array.from(atob(result.audio),c=>c.charCodeAt(0))],{type:'audio/wav'});cues=result.cues;setDurations(result.sceneDurations);fingerprint=signature();if(previewURL)URL.revokeObjectURL(previewURL);previewURL=URL.createObjectURL(audio);$('voicePreview').src=previewURL;$('voicePreview').hidden=false;$('voiceStatus').textContent=`Narration ready · ${result.duration.toFixed(1)} seconds. Listen below, then continue. Captions are timed to the generated speech.`;}catch(e){showError(e);}finally{setBusy(false);onChange();}};
+  for(const id of ['voice','speechSpeed'])$(id).addEventListener('change',()=>{$('voiceStatus').textContent='Voice changed. Generate narration again before continuing.';onChange();});
+  return state;
+}

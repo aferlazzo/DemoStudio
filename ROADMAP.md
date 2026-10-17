@@ -1,20 +1,13 @@
-# Demo Studio roadmap
+# DemoStudio roadmap
 
-## First-run experience
+Delivered: five-step workflow, finished first-run DemoStudio video, separate real SoHelpMe demo, local American narration, measured caption timing, actual screen-recording import, browser capture, local MP4 rendering, preview/export, reusable projects, and a watch/download gallery.
 
-- [x] Guided setup with one step at a time.
-- [x] Interactive tour of Demo Studio’s own real screens, before screen permissions.
-- [x] Demo Studio scene plan as the default; SoHelpMe as a separate example.
-- [ ] Human-approved full screen/microphone recording trial.
-- [ ] Record and review a narrated introduction to Demo Studio using the actual app.
-- [ ] Make that verified recording available as an optional first-run video.
+Optional future improvements:
 
-## Recorder improvements
+- Microphone level check, countdown, and dedicated live capture trials across more browsers.
+- Timeline trimming and scene rearrangement.
+- Unsaved recording recovery after navigation or a crash.
+- Word alignment for imported voiceovers.
+- Cross-platform voice setup and an installable desktop package.
 
-- [ ] Microphone level check and short playback test.
-- [ ] Countdown before capture begins.
-- [ ] Visible audio-track confirmation and recovery instructions.
-- [ ] Recording recovery after accidental navigation.
-- [ ] Trim the beginning and end before export.
-
-The interactive tour is not a prerecorded demo. It navigates the real interface and does not fabricate recordings, app responses or successful exports. Actual screen and microphone capture require the user’s browser permission.
+These are not represented as working features in the videos. The verified path is imported genuine footage → generated narration/captions → rendered preview → MP4 export. See COMPLETION.md for testing scope.

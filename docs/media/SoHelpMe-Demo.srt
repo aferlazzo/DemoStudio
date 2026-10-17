@@ -1,0 +1,95 @@
+1
+00:00:00,000 --> 00:00:03,115
+Your refrigerator has picked up a new hobby: percussion.
+
+2
+00:00:03,275 --> 00:00:06,581
+Let's use SoHelpMe to work through an unfamiliar rattle, one
+
+3
+00:00:06,741 --> 00:00:08,235
+observation at a time.
+
+4
+00:00:08,745 --> 00:00:11,795
+I describe the intermittent rattling and mention that the
+
+5
+00:00:11,955 --> 00:00:13,790
+refrigerator still seems cold.
+
+6
+00:00:13,950 --> 00:00:15,401
+Plain language is enough.
+
+7
+00:00:15,561 --> 00:00:18,761
+I don't need to know the name of a single refrigerator part.
+
+8
+00:00:19,271 --> 00:00:20,636
+Now I choose Get help.
+
+9
+00:00:20,796 --> 00:00:24,679
+SoHelpMe responds with a practical first check and asks for more
+
+10
+00:00:24,839 --> 00:00:28,849
+information, instead of expecting me to arrive with a diagnosis.
+
+11
+00:00:29,359 --> 00:00:32,602
+Here, the response points to items that may be touching or
+
+12
+00:00:32,762 --> 00:00:35,343
+vibrating, and asks what changes the rattle.
+
+13
+00:00:35,503 --> 00:00:39,066
+I can read the suggestion and answer what I actually notice.
+
+14
+00:00:39,576 --> 00:00:42,968
+For this demonstration, I report that two glass bottles were
+
+15
+00:00:43,128 --> 00:00:44,579
+touching inside the door.
+
+16
+00:00:44,739 --> 00:00:48,216
+Separating them stopped the rattle, and the refrigerator is still
+
+17
+00:00:48,376 --> 00:00:49,464
+cooling normally.
+
+18
+00:00:49,974 --> 00:00:53,750
+The follow-up recommends keeping the bottles apart and monitoring
+
+19
+00:00:53,910 --> 00:00:55,382
+whether the sound returns.
+
+20
+00:00:55,542 --> 00:00:59,510
+That's a useful next step for this example, with room to continue if
+
+21
+00:00:59,670 --> 00:01:00,993
+the problem changes.
+
+22
+00:01:01,503 --> 00:01:05,449
+A clearer description, a useful question, and a practical next step.
+
+23
+00:01:05,609 --> 00:01:06,569
+SoHelpMe.
+
+24
+00:01:06,729 --> 00:01:08,180
+A little help when you need it.

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "settings": {"projectName":"SoHelpMe-Demo","appUrl":"https://sohelpme.netlify.app/","audioMode":"generated","timing":"auto","resolution":"1280","captions":true,"fade":true,"tabAudio":false},
+  "masks": [],
+  "scenes": [
+    {"duration":10,"title":"A mysterious rattle","action":"Show the actual SoHelpMe opening screen.","text":"Your refrigerator has picked up a new hobby: percussion. Let's use SoHelpMe to work through an unfamiliar rattle, one observation at a time."},
+    {"duration":12,"title":"Describe the problem","action":"Type the refrigerator description into the real application.","text":"I describe the intermittent rattling and mention that the refrigerator still seems cold. Plain language is enough. I don't need to know the name of a single refrigerator part."},
+    {"duration":10,"title":"Get help","action":"Submit Get help and wait for the real response.","text":"Now I choose Get help. SoHelpMe responds with a practical first check and asks for more information, instead of expecting me to arrive with a diagnosis."},
+    {"duration":12,"title":"Read the first check","action":"Keep the actual response readable on screen.","text":"Here, the response points to items that may be touching or vibrating, and asks what changes the rattle. I can read the suggestion and answer what I actually notice."},
+    {"duration":12,"title":"Answer with an observation","action":"Report the example observation about bottles touching, then send.","text":"For this demonstration, I report that two glass bottles were touching inside the door. Separating them stopped the rattle, and the refrigerator is still cooling normally."},
+    {"duration":10,"title":"A useful next step","action":"Show the real follow-up response. Narrate only if the on-screen response matches.","text":"The follow-up recommends keeping the bottles apart and monitoring whether the sound returns. That's a useful next step for this example, with room to continue if the problem changes."},
+    {"duration":8,"title":"Closing","action":"Leave the guidance visible through the closing line.","text":"A clearer description, a useful question, and a practical next step. SoHelpMe. A little help when you need it."}
+  ]
+}

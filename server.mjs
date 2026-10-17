@@ -1,3 +1,4 @@
+import {readBody,narrate,renderMovie,speechReady,runProcess} from './media.mjs';
 import http from 'node:http';
 import {readFile, mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
@@ -7,11 +8,30 @@ import {spawn} from 'node:child_process';
 import ffmpeg from 'ffmpeg-static';
 const root=join(dirname(fileURLToPath(import.meta.url)),'public');
 const port=Number(process.env.PORT||4317);
-const allowed=new Map([['/','index.html'],['/app.js','app.js'],['/core.js','core.js'],['/guide.js','guide.js'],['/style.css','style.css']]);
+const allowed=new Map([['/','index.html'],['/app.js','app.js'],['/core.js','core.js'],['/guide.js','guide.js'],['/narration.js','narration.js'],['/style.css','style.css']]);
 const server=http.createServer(async(req,res)=>{
   const origin=`http://127.0.0.1:${port}`;
   res.setHeader('X-Content-Type-Options','nosniff');
   if(req.headers.host!==`127.0.0.1:${port}`&&req.headers.host!==`localhost:${port}`){res.writeHead(403);res.end('Local access only');return;}
+  if(req.method==='GET'&&req.url==='/demos'){res.writeHead(302,{Location:'/demos/'});res.end();return;}
+  const demoPath=(req.url||'').replace(/^\/demos\/$/,'/demos/index.html');
+  const demoFiles=new Map([['/demos/index.html','index.html'],['/demos/media/SoHelpMe-Demo.mp4','media/SoHelpMe-Demo.mp4'],['/demos/media/DemoStudio-Demo.mp4','media/DemoStudio-Demo.mp4'],['/demos/media/SoHelpMe-Demo.srt','media/SoHelpMe-Demo.srt'],['/demos/media/DemoStudio-Demo.srt','media/DemoStudio-Demo.srt']]);
+  if(req.method==='GET'&&demoFiles.has(demoPath)){
+    try{const file=demoFiles.get(demoPath),data=await readFile(join(root,'../docs',file));const headers={'Content-Type':file.endsWith('.mp4')?'video/mp4':file.endsWith('.srt')?'text/plain; charset=utf-8':'text/html; charset=utf-8','Accept-Ranges':'bytes'};
+      if(req.headers.range){const match=/^bytes=(\d+)-(\d*)$/.exec(req.headers.range),start=Number(match?.[1]),end=match?.[2]?Number(match[2]):data.length-1;if(!match||start>end||start>=data.length||end>=data.length){res.writeHead(416,{'Content-Range':`bytes */${data.length}`});res.end();return;}const part=data.subarray(start,end+1);res.writeHead(206,{...headers,'Content-Length':part.length,'Content-Range':`bytes ${start}-${end}/${data.length}`});res.end(part);return;}
+      res.writeHead(200,{...headers,'Content-Length':data.length});res.end(data);
+    }catch{res.writeHead(404);res.end('Demo file not available. Watch the published videos at https://aferlazzo.github.io/DemoStudio/');}return;
+  }
+  if(req.method==='GET'&&req.url==='/narration/status'){res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({ready:await speechReady()}));return;}
+  if(req.method==='POST'&&['/narration','/narration/setup','/render'].includes(req.url)){
+    if(![origin,`http://localhost:${port}`].includes(req.headers.origin)){res.writeHead(403);res.end('Invalid origin');return;}
+    try{
+      if(req.url==='/narration/setup'){await runProcess('powershell.exe',['-NoProfile','-File',join(root,'../scripts/setup-speech.ps1')],{timeout:600000});res.writeHead(200);res.end('Ready');}
+      else if(req.url==='/narration'){const result=await narrate(JSON.parse((await readBody(req,150000)).toString('utf8')));res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify(result));}
+      else{const form=await new Response(await readBody(req),{headers:{'Content-Type':req.headers['content-type']||''}}).formData();const movie=await renderMovie(form);res.writeHead(200,{'Content-Type':'video/mp4','Content-Length':movie.length});res.end(movie);}
+    }catch(e){res.writeHead(400,{'Content-Type':'text/plain'});res.end(e.message);}
+    return;
+  }
   if(req.method==='POST'&&req.url==='/convert'){
     if(![origin,`http://localhost:${port}`].includes(req.headers.origin)){res.writeHead(403);res.end('Invalid origin');return;}
     let dir;
