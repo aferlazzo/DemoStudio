@@ -42,3 +42,14 @@ The completed production path uses imported genuine screen footage with generate
 There is no editing timeline, automatic secret redaction, word-level live transcription, or crash recovery. Generated caption segments are measured to the actual audio; imported/microphone narration still uses manual scene timings. Short imported footage holds its last frame; long footage ends with the script. Voice setup needs compatible Python and an initial download. The app remains a local tool; the public website hosts the videos and download instructions.
 
 These limits are disclosed in the README and are not portrayed as completed features. No paid service or API key was used.
+
+## Published delivery checks
+
+The gallery is published at https://aferlazzo.github.io/DemoStudio/. GitHub Pages deployment and Windows CI both completed successfully. Both public video URLs returned HTTP 200 with video/mp4, and their downloaded bytes matched the local verified originals. Both GitHub Release v1.1.0 assets were independently downloaded and matched as well. Public embedded-Chrome playback reached readyState 4 with advancing time and the expected duration/dimensions for both files.
+
+SHA-256:
+
+- SoHelpMe-Demo.mp4: `3bdfed55d4bb0d8a03e3d4c4e2dcfd23882e01fffacf5e0ea95950f7034ef7cd`
+- DemoStudio-Demo.mp4: `444cf8fe2dcb4644528222eaae4509ada420fe8a439f82ed61d42e26e6a7dcec`
+
+All three source commits present at initial publication were scanned for common credential/private-key patterns and email addresses; no matches were found in repository file contents. Commit identity metadata is not application content and was not altered.
