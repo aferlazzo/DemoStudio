@@ -13,14 +13,16 @@ if(-not $speechPython){
 if(-not $speechPython){throw 'Python 3.10–3.12 is required for local narration. Install Python from python.org, then run Setup Narration.cmd again.'}
 & $speechPython -c 'import sys;assert (3,10)<=sys.version_info[:2]<=(3,12), "Use Python 3.10, 3.11 or 3.12"'
 if($LASTEXITCODE -ne 0){throw 'A compatible Python runtime was not found.'}
-$packages=Join-Path $localRoot 'speech-packages'
-& $speechPython -m pip install --target $packages kokoro-onnx==0.5.0 soundfile==0.14.0 espeakng-loader==0.2.4
-if($LASTEXITCODE -ne 0){throw 'Speech package installation failed. Check your internet connection.'}
-$models=Join-Path $localRoot 'speech-models'
+$packages=Join-Path $localRoot 'piper-packages'
+& $speechPython -m pip install --upgrade --target $packages piper-tts==1.8.0
+if($LASTEXITCODE -ne 0){throw 'Piper installation failed. Check your internet connection.'}
+$models=Join-Path $localRoot 'piper-voices'
 New-Item -ItemType Directory -Force $models | Out-Null
-foreach($model in @('kokoro-v1.0.onnx','voices-v1.0.bin')){
-  $targetModel=Join-Path $models $model
-  if(-not (Test-Path $targetModel)){Invoke-WebRequest -Uri "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$model" -OutFile $targetModel}
-}
-@{python=$speechPython;packages=$packages} | ConvertTo-Json | Set-Content (Join-Path $localRoot 'speech.json') -Encoding utf8
-Write-Output 'Local narration is ready.'
+$previousPythonPath=$env:PYTHONPATH
+try{
+  $env:PYTHONPATH=$packages
+  & $speechPython -m piper.download_voices en_US-ljspeech-high --download-dir $models
+  if($LASTEXITCODE -ne 0){throw 'Piper voice download failed. Check your internet connection and retry setup.'}
+}finally{$env:PYTHONPATH=$previousPythonPath}
+@{engine='piper';python=$speechPython;packages=$packages} | ConvertTo-Json | Set-Content (Join-Path $localRoot 'speech.json') -Encoding utf8
+Write-Output 'Free local Piper narration is ready.'

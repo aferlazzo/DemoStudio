@@ -2,7 +2,7 @@
 
 Verified on Windows with Node 20 and Python 3.12, October 17, 2026. Development continues in the existing aferlazzo/DemoStudio repository, preserving its original commits. SoHelpMe code and deployment were not changed.
 
-## Delivered
+## Original delivery (before the Piper update)
 
 - Guided five-step application, with a finished example video as the first learning option.
 - Offline Kokoro American narration, three voices, pace control, audio preview, measured caption segments, automatic scene duration updates, and stale-script checks.
@@ -53,3 +53,12 @@ SHA-256:
 - DemoStudio-Demo.mp4: `444cf8fe2dcb4644528222eaae4509ada420fe8a439f82ed61d42e26e6a7dcec`
 
 All three source commits present at initial publication were scanned for common credential/private-key patterns and email addresses; no matches were found in repository file contents. Commit identity metadata is not application content and was not altered.
+
+
+## Piper update — October 17, 2026
+
+New generated narration now uses free local Piper (`piper-tts` 1.8.0) with the American English LJ Speech high voice, 22,050 Hz. The setup script installs Piper in its own ignored package directory and downloads the voice. Existing Kokoro configuration is detected as requiring Piper setup. Caption start/end times and scene lengths come from the actual Piper PCM samples. Pace changes map to Piper's synthesis length scale.
+
+Passed: the documented setup script, all seven regression tests, and the opt-in `npm run test:piper` integration check. The latter generates real speech at two paces, checks WAV duration against the caption clock, verifies audible sample data and nonoverlapping captions, and rejects unsupported voices and invalid pace. A fresh embedded-Chrome trial generated Piper speech, previewed it, rendered an imported real recording with captions, and exported an MP4.
+
+The two published demonstration MP4s retain their original voices. Their narration provenance is now stated on the gallery page and in the README. Piper is used for new generation; no cloud voice API or subscription is involved.

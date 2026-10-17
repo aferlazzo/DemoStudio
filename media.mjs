@@ -17,10 +17,14 @@ export async function runProcess(command,args,{input,cwd,timeout=300000}={}){
   });
 }
 export async function readBody(req,max=300*1024*1024){const chunks=[];let size=0;for await(const c of req){size+=c.length;if(size>max)throw new Error('File too large. Use a recording smaller than 300 MB.');chunks.push(c);}return Buffer.concat(chunks);}
-export async function speechReady(){try{await Promise.all(['.local/speech-models/kokoro-v1.0.onnx','.local/speech-models/voices-v1.0.bin','.local/speech.json'].map(p=>access(join(root,p))));return true;}catch{return false;}}
+export async function speechReady(){try{
+  const config=JSON.parse((await readFile(join(root,'.local/speech.json'),'utf8')).replace(/^\uFEFF/,''));
+  if(config.engine!=='piper')return false;
+  await Promise.all([join(root,'.local/piper-voices/en_US-ljspeech-high.onnx'),join(root,'.local/piper-voices/en_US-ljspeech-high.onnx.json'),join(config.packages,'piper/__init__.py'),config.python].map(p=>access(p)));return true;
+}catch{return false;}}
 export async function narrate(request){
   if(speechBusy)throw new Error('Narration is already being generated. Please wait.');
-  if(!await speechReady())throw new Error('Local narration is not installed. Run Setup Narration.cmd in the DemoStudio folder once, then try again.');
+  if(!await speechReady())throw new Error('Piper narration is not installed. Run Setup Narration.cmd in the DemoStudio folder once, then try again.');
   const scenes=validateScenes(request.scenes);if(!scenes.some(s=>s.text.trim()))throw new Error('Write a narration script in at least one scene first.');
   speechBusy=true;let dir;
   try{dir=await mkdtemp(join(tmpdir(),'demo-narration-'));const config=JSON.parse((await readFile(join(root,'.local/speech.json'),'utf8')).replace(/^\uFEFF/,''));

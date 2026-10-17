@@ -1,5 +1,5 @@
 """Generate narration locally. JSON on stdin; assets stay in the requested job folder."""
-import sys, json, os, re
+import sys, json, re, wave
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
@@ -9,32 +9,34 @@ if config_path.exists():
     config = json.loads(config_path.read_text(encoding='utf-8-sig'))
     if config.get('packages'):
         sys.path.insert(0, config['packages'])
-sys.path.insert(0, str(local / 'speech-packages'))
+sys.path.insert(0, str(local / 'piper-packages'))
 
 def main():
-    import numpy as np
-    import soundfile as sf
-    import espeakng_loader
-    from kokoro_onnx import Kokoro, EspeakConfig
+    from piper import PiperVoice, SynthesisConfig
+    from piper.config import PiperConfig
     request = json.load(sys.stdin)
     scenes = request['scenes']
     if not isinstance(scenes, list) or not 1 <= len(scenes) <= 40:
         raise ValueError('Use 1–40 scenes.')
     if sum(len(str(s.get('text', ''))) for s in scenes) > 14000:
         raise ValueError('Keep narration below 14,000 characters.')
-    voice = request.get('voice', 'af_heart')
-    if voice not in ('af_heart', 'am_michael', 'af_sarah'):
+    voice = request.get('voice', 'en_US-ljspeech-high')
+    if voice != 'en_US-ljspeech-high':
         raise ValueError('Choose one of the available voices.')
-    speed = max(.75, min(1.25, float(request.get('speed', 1))))
+    speed = float(request.get('speed', 1))
+    if not .75 <= speed <= 1.25:
+        raise ValueError('Choose a pace between 0.75 and 1.25.')
     import onnxruntime as ort
     options = ort.SessionOptions()
     options.intra_op_num_threads = 2
     options.inter_op_num_threads = 1
-    session = ort.InferenceSession(str(local / 'speech-models/kokoro-v1.0.onnx'), sess_options=options, providers=['CPUExecutionProvider'])
-    engine = Kokoro.from_session(session, str(local / 'speech-models/voices-v1.0.bin'),
-                    espeak_config=EspeakConfig(lib_path=espeakng_loader.get_library_path(),
-                                               data_path=espeakng_loader.get_data_path()))
-    rate = 24000
+    model_path = local / 'piper-voices' / (voice + '.onnx')
+    model_config = json.loads(Path(str(model_path) + '.json').read_text(encoding='utf-8'))
+    engine = PiperVoice(session=ort.InferenceSession(str(model_path), sess_options=options,
+                         providers=['CPUExecutionProvider']),
+                        config=PiperConfig.from_dict(model_config))
+    synthesis = SynthesisConfig(length_scale=1 / speed, volume=.85)
+    rate = engine.config.sample_rate
     audio, cues, durations = [], [], []
     samples_so_far = 0
     for scene in scenes:
@@ -55,22 +57,27 @@ def main():
             if line:
                 chunks.append(line)
         for chunk in chunks:
-            data, rate = engine.create(chunk, voice=voice, speed=speed, lang='en-us')
+            data = b''.join(part.audio_int16_bytes for part in engine.synthesize(chunk, syn_config=synthesis))
+            sample_count = len(data) // 2
             audio.append(data)
-            cues.append({'start': samples_so_far / rate, 'end': (samples_so_far + len(data)) / rate, 'text': chunk})
-            samples_so_far += len(data)
-            pause = np.zeros(int(rate * .16), dtype=np.float32)
+            cues.append({'start': samples_so_far / rate, 'end': (samples_so_far + sample_count) / rate, 'text': chunk})
+            samples_so_far += sample_count
+            pause = bytes(int(rate * .16) * 2)
             audio.append(pause)
-            samples_so_far += len(pause)
+            samples_so_far += len(pause) // 2
         padding = max(int(rate * .35), 2 * rate - (samples_so_far - start))
-        audio.append(np.zeros(padding, dtype=np.float32))
+        audio.append(bytes(padding * 2))
         samples_so_far += padding
         durations.append((samples_so_far - start) / rate)
     folder = Path(request['output'])
     folder.mkdir(parents=True, exist_ok=True)
-    sf.write(str(folder / 'narration.wav'), np.concatenate(audio), rate)
+    with wave.open(str(folder / 'narration.wav'), 'wb') as output:
+        output.setnchannels(1)
+        output.setsampwidth(2)
+        output.setframerate(rate)
+        output.writeframes(b''.join(audio))
     result = {'cues': cues, 'sceneDurations': durations, 'duration': samples_so_far / rate,
-              'voice': voice, 'sampleRate': rate}
+              'voice': voice, 'engine': 'piper', 'sampleRate': rate}
     (folder / 'timeline.json').write_text(json.dumps(result), encoding='utf-8')
     print(json.dumps({'ok': True, 'duration': result['duration']}))
 

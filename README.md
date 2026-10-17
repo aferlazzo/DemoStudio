@@ -1,6 +1,6 @@
 # DemoStudio
 
-Make narrated demonstration videos of your real applications. DemoStudio combines genuine footage, a local American voice, and timed captions into a shareable H.264/AAC MP4. No API key, paid voice subscription, or account is needed.
+Make narrated demonstration videos of your real applications. DemoStudio combines genuine footage, free local Piper narration, and timed captions into a shareable H.264/AAC MP4. No API key, paid voice subscription, or account is needed.
 
 **[Watch DemoStudio explain itself, then watch its SoHelpMe demo](https://aferlazzo.github.io/DemoStudio/).** Both finished videos can be watched and downloaded without installing anything. DemoStudio itself runs locally; the public page is the video gallery.
 
@@ -9,19 +9,25 @@ Make narrated demonstration videos of your real applications. DemoStudio combine
 1. Download this repository using **Code → Download ZIP**, and extract it. Install **Node.js 20 or newer** from [nodejs.org](https://nodejs.org/) if needed.
 2. Double-click **Start Demo Studio.cmd**. First launch downloads the video dependency. Keep its terminal window open.
 3. Open **http://127.0.0.1:4317/** in desktop Chrome, Edge, or the embedded browser. Choose **Watch Demo Studio in action** for the finished walkthrough.
-4. To generate voices, install **Python 3.10–3.12** from [python.org](https://www.python.org/downloads/) if needed. In Narration, choose **Set up narration · one-time download**. Alternatively double-click **Setup Narration.cmd**. Setup downloads roughly 400 MB; allow several minutes and an internet connection.
+4. To generate voices, install **Python 3.10–3.12** from [python.org](https://www.python.org/downloads/) if needed. In Narration, choose **Set up narration · one-time download**. Alternatively double-click **Setup Narration.cmd**. Setup downloads roughly 200 MB; allow several minutes and an internet connection.
 
 Do not open `public/index.html` directly. The app needs its local server. Stop the server with Ctrl+C. Advanced launch: `npm ci`, then `npm start`. The server listens only on this computer.
 
 ## Make your next video
 
 1. **Story:** name the project and paste your app’s address. Try the SoHelpMe example or load `examples/SoHelpMe.json`. Expand the scene editor to describe what the audience will see and hear. Rehearse the real app first; adjust the script to its actual responses.
-2. **Narration:** choose a voice and pace, then click **Generate narration & captions**. Wait for the audio player and listen. Generation updates scene durations and captions to the actual spoken segments. Changing the script, voice, pace, or duration requires generating again. Microphone, imported voiceover, and silent modes are also available for live capture.
+2. **Narration:** choose the Piper American English voice and pace, then click **Generate narration & captions**. Wait for the audio player and listen. Generation updates scene durations and captions to the actual spoken segments. Changing the script, voice, pace, or duration requires generating again. Microphone, imported voiceover, and silent modes are also available for live capture.
 3. **App preview:** choose a real app tab/window, or import an existing MP4/WebM screen recording. Import works in embedded browsers that cannot share a screen. Check framing and private information. Optional crop controls and fixed privacy masks are available. Tick the preview confirmation.
 4. **Record / Create:** for an imported recording, click **Create narrated video preview**. For live capture, click **Start recording** and perform the real workflow beside the studio. Pause during waits and Finish when ready. Narration and recording pause together. Browser permissions are requested only for live capture.
 5. **Save video:** watch the finished playback, then **Export MP4**. Save captions separately if desired. Return to Story and **Save project** to reuse the script and layout.
 
 For ThinkAgain, Waiting Room Buddy, or another app, change the project name, address, and scenes, then repeat. Project JSON saves scripts, settings, crop, masks, and voice choice; it does **not** include video, audio, or generated caption data. Reselect source files and regenerate narration after loading a project.
+
+## Piper narration
+
+Piper 1.8.0 generates new narration locally with the American English LJ Speech voice. Setup installs its runtime and model once. Existing installations must run **Setup Narration.cmd** once to switch engines; old project files remain compatible. No paid service, subscription, or API key is required. The two already published demonstration MP4s retain their original Kokoro narration; the app now uses Piper for newly generated audio.
+
+Run `npm run test:piper` after setup to verify real voice generation, pace control, WAV duration, and caption timing. This optional integration test requires the local model; regular CI does not download it.
 
 ## Privacy
 
