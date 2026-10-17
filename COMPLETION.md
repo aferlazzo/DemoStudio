@@ -42,3 +42,7 @@ Watch/download: https://aferlazzo.github.io/DemoStudio/. Run the existing app lo
 The verified production route is actual imported footage plus generated Piper narration and captions. Direct OS screen/microphone permission prompts were not exercised in this embedded-browser run. Their existing functionality remains browser dependent. There is no timeline editor, automatic redaction, word-level live transcription, or crash recovery. Unsaved media stays in browser memory. The public page is a video gallery; the editor runs locally.
 
 No environmental blocker prevented this delivery.
+
+## Published playback and download checks
+
+GitHub Pages deployed the Piper videos successfully, and Windows CI passed for the delivery commit. Both public gallery MP4 URLs returned HTTP 200 with video/mp4; their bytes matched the verified local originals. All four v1.2.0 release assets (two MP4s and two WAVs) were downloaded independently and matched as well. Embedded Chrome reported advancing video time, readyState 4, correct dimensions/durations, audio enabled, and no media errors. Gallery playback was checked locally and publicly. Starting the second gallery video now pauses the first automatically; that behavior was also exercised in embedded Chrome.
