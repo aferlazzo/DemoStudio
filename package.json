@@ -1,0 +1,1 @@
+{"name":"demo-studio","version":"1.0.0","private":true,"type":"module","scripts":{"start":"node server.mjs","test":"node --test test/core.test.mjs test/export.test.mjs"},"dependencies":{"ffmpeg-static":"5.2.0"}}
