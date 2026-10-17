@@ -1,64 +1,44 @@
-# DemoStudio delivery and verification
+# DemoStudio — Piper delivery report
 
-Verified on Windows with Node 20 and Python 3.12, October 17, 2026. Development continues in the existing aferlazzo/DemoStudio repository, preserving its original commits. SoHelpMe code and deployment were not changed.
+Completed in the existing aferlazzo/DemoStudio repository on October 17, 2026. Original history and application functionality are preserved. SoHelpMe code and deployment were not changed.
 
-## Original delivery (before the Piper update)
+## Current deliverables
 
-- Guided five-step application, with a finished example video as the first learning option.
-- Offline Kokoro American narration, three voices, pace control, audio preview, measured caption segments, automatic scene duration updates, and stale-script checks.
-- Actual screen-recording import, preview, crop and fixed masks, local FFmpeg composition, H.264/AAC MP4 playback and export, plus separate SRT downloads.
-- Existing browser screen/microphone capture retained. Generated narration also connects to the existing live recorder.
-- Reusable example projects, local voice installer, simple README, local gallery and public gallery source in docs/.
+| File | Duration | Format | Bytes |
+| --- | --- | --- | --- |
+| DemoStudio-Demo.mp4 | 114.00 seconds | H.264, 1280×900, 30 fps; AAC mono 22,050 Hz | 2,753,188 |
+| SoHelpMe-Demo.mp4 | 74.27 seconds | H.264, 1280×900, 30 fps; AAC mono 22,050 Hz | 2,103,035 |
+| DemoStudio-Narration.wav | 114.00 seconds | PCM signed 16-bit mono, 22,050 Hz | 5,027,478 |
+| SoHelpMe-Narration.wav | 74.24 seconds | PCM signed 16-bit mono, 22,050 Hz | 3,274,162 |
 
-## Videos
+Both current videos use locally installed Piper 1.8.0 with the American English LJ Speech high voice. There are no Microsoft speech requests, API keys, paid subscriptions, or cloud synthesis services in the production narration path. Piper runs successfully in this environment, so no fallback engine is needed. The v1.1.0 release preserves the original Kokoro examples; current gallery videos replace them with Piper versions.
 
-| File | Duration | Picture | Audio | Bytes |
-| --- | --- | --- | --- | --- |
-| SoHelpMe-Demo.mp4 | 68.70 seconds | 1280×900, H.264, 30 fps, yuv420p | AAC mono, 24 kHz | 2,112,961 |
-| DemoStudio-Demo.mp4 | 114.53 seconds | 1280×900, H.264, 30 fps, yuv420p | AAC mono, 24 kHz | 3,376,327 |
+## What the walkthrough actually shows
 
-Both use genuine continuous browser-frame captures of the actual applications, not recreated HTML, invented app screens, or static storyboards. Embedded Chrome frames were captured repeatedly during the interactions and encoded to 30 fps; source capture cadence varied with browser work, approximately 6–11 fps in most segments. Slow UI operations have fewer distinct frames. The tutorial explicitly explains that its processing wait was shortened. Opening and closing fades are applied by DemoStudio's renderer.
+Fresh footage of the existing DemoStudio application: load the SoHelpMe project, review scene text, request real Piper generation, preview its WAV, import actual SoHelpMe footage, review crop/privacy controls, render a real MP4, download that file using Export MP4, play it inside DemoStudio, and return to reusable project settings. Narration explains repeating the workflow for ThinkAgain and Waiting Room Buddy. This is a full 114-second demonstration, not the earlier short voice smoke test.
 
-SoHelpMe's actual first response asks the user to check bottles/containers/shelves that could vibrate and report the result. The example follow-up says separating two touching bottles stopped the rattle; the real application recommends keeping them separated and observing whether the sound returns. The narration identifies this as a demonstration observation. The closing is: “SoHelpMe. A little help when you need it.”
+Footage consists of continuous browser viewport captures during actual interactions. No fictional interface, invented app response, desktop account screen, or storyboard is substituted. The embedded capture interface sampled the new walkthrough at about three distinct frames per second; the MP4 is encoded at 30 fps. Actual UI footage is cropped to remove empty capture padding. Processing waits are shortened and the narration says so. Scene footage is retimed to its spoken section. Opening/closing fades and open captions are applied by DemoStudio's media renderer.
 
-The tutorial records the real project loader, script fields, successful local voice request, actual source import, privacy controls, real render, actual Export MP4 download, and playback of the resulting SoHelpMe video. It explains reuse for ThinkAgain and Waiting Room Buddy. Its own finished video was composed using the same DemoStudio renderMovie pipeline. The delivered SoHelpMe file is the exact file downloaded by the app's Export MP4 control.
+The SoHelpMe source is the previously recorded real refrigerator conversation. It is retimed to its new Piper narration. Its first real reply recommends checking items that could vibrate and reporting the result; the example observation concerns touching bottles. The real follow-up recommends keeping them separated and monitoring for recurrence. Its requested closing line is preserved. The final SoHelpMe MP4 is the exact file downloaded through the working app's Export MP4 button.
 
-## Passed checks
+## Narration and synchronization
 
-- All 7 automated tests: scene validation, boundary handling, captions, SRT, filenames, actual FFmpeg conversion/render/decode, invalid caption rejection, local gallery/range handling, and foreign-origin rejection.
-- JavaScript syntax checks for app, guide, narration, server, and media modules.
-- Documented PowerShell voice installer completed; a fresh browser project then generated and previewed narration using that installed configuration.
-- End-to-end browser trial: load project → generate narration → import real footage → confirm preview → create preview → download MP4. The full SoHelpMe video and a fresh short verification project were both exported through the actual UI.
-- Both final MP4s decoded completely with FFmpeg without errors, including their audio streams. Embedded Chrome playback reported readyState 4, correct dimensions/durations, and advancing playback for both gallery videos.
-- An independent local tiny.en speech recognizer recovered both complete narrations, including the closing and future-app references. Normalized script-word matches were 95.7% for SoHelpMe and 97.5% for DemoStudio. All matched words fell within their caption interval plus 0.5 seconds; maximum distance outside the intended interval was 0.039 and 0.075 seconds respectively. This is automated intelligibility/synchronization evidence, not a human listening-panel assessment.
-- Audio peaks were -1.6 dBFS and -0.5 dBFS; average levels -22.8 and -22.6 dBFS. No digital clipping was detected by the peak measurement.
-- Sampled frames across both full videos were visually inspected for readable application text/captions and private data. Capture was limited to app viewports; desktop browser chrome, account menus and email settings were excluded.
-- Repository source was checked for common API-token/private-key patterns and email addresses; no matches. Models, local machine configuration, environment files, raw footage and voice files are ignored. Only reviewed public example videos are committed.
+Piper produces local WAV audio. Each caption's text is the same segment passed to Piper, and its boundaries are measured from the generated PCM sample count. Scene durations include measured speech and small pauses. The tutorial voice was synthesized at pace 1.05 and then accelerated by approximately 1.124 with FFmpeg to fit 114 seconds; caption and scene times were scaled by the same factor. The final WAV is padded to exactly 114 seconds before rendering. The SoHelpMe voice uses the app's Natural pace without this postprocessing.
 
-## Limits and optional future work
+## Verification passed
 
-The completed production path uses imported genuine screen footage with generated narration. Direct browser/OS screen-sharing and microphone permission dialogs were not exercised in this embedded-browser run; those existing paths remain dependent on desktop Chrome/Edge support. Shared tab audio is likewise browser dependent.
+- All seven existing automated tests passed: scene/caption helpers, filename validation, real FFmpeg conversion and render/decode, invalid timelines, origin rejection, and local gallery range requests. The gallery test also covers versioned MP4 URLs.
+- `npm run test:piper` passed using real local synthesis at two paces. It checks WAV samples against caption duration, audible sample data, caption ordering, pace behavior, and invalid voice/pace rejection.
+- Both final video/audio streams decoded completely with FFmpeg without errors. DemoStudio narration WAV was also decoded as 16-bit PCM mono at the expected duration and rate.
+- Audio measurements: DemoStudio mean -19.4 dBFS, peak -1.4 dBFS; SoHelpMe mean -19.6 dBFS, peak -1.4 dBFS. Both contain sustained speech and their measured peaks are below digital clipping.
+- An independent local speech recognizer recovered the full narrations, including the Piper explanation, Microsoft-free workflow, future-app references, and SoHelpMe closing. Normalized script word matches: 94.3% DemoStudio, 96.2% SoHelpMe. All matched words fell within the intended caption interval plus 0.5 seconds; maximum distance outside the intended interval was 0.105 and 0.114 seconds. This is automated intelligibility evidence, not a human listening-panel assessment.
+- Frames sampled across both videos were visually checked for genuine UI, readable captions, framing, and private information. Capture was limited to app viewports, with account and email settings closed. Source and generated assets were checked for common secret/email patterns before publication.
+- Browser playback and public download checks are recorded after publication below. File hashes are in docs/media/verification.json.
 
-There is no editing timeline, automatic secret redaction, word-level live transcription, or crash recovery. Generated caption segments are measured to the actual audio; imported/microphone narration still uses manual scene timings. Short imported footage holds its last frame; long footage ends with the script. Voice setup needs compatible Python and an initial download. The app remains a local tool; the public website hosts the videos and download instructions.
+## Access and remaining limits
 
-These limits are disclosed in the README and are not portrayed as completed features. No paid service or API key was used.
+Watch/download: https://aferlazzo.github.io/DemoStudio/. Run the existing app locally using Start Demo Studio.cmd; voice setup is already complete on this machine. Fresh installations use Setup Narration.cmd once and require compatible Python plus the initial model download. README.md explains the full workflow.
 
-## Published delivery checks
+The verified production route is actual imported footage plus generated Piper narration and captions. Direct OS screen/microphone permission prompts were not exercised in this embedded-browser run. Their existing functionality remains browser dependent. There is no timeline editor, automatic redaction, word-level live transcription, or crash recovery. Unsaved media stays in browser memory. The public page is a video gallery; the editor runs locally.
 
-The gallery is published at https://aferlazzo.github.io/DemoStudio/. GitHub Pages deployment and Windows CI both completed successfully. Both public video URLs returned HTTP 200 with video/mp4, and their downloaded bytes matched the local verified originals. Both GitHub Release v1.1.0 assets were independently downloaded and matched as well. Public embedded-Chrome playback reached readyState 4 with advancing time and the expected duration/dimensions for both files.
-
-SHA-256:
-
-- SoHelpMe-Demo.mp4: `3bdfed55d4bb0d8a03e3d4c4e2dcfd23882e01fffacf5e0ea95950f7034ef7cd`
-- DemoStudio-Demo.mp4: `444cf8fe2dcb4644528222eaae4509ada420fe8a439f82ed61d42e26e6a7dcec`
-
-All three source commits present at initial publication were scanned for common credential/private-key patterns and email addresses; no matches were found in repository file contents. Commit identity metadata is not application content and was not altered.
-
-
-## Piper update — October 17, 2026
-
-New generated narration now uses free local Piper (`piper-tts` 1.8.0) with the American English LJ Speech high voice, 22,050 Hz. The setup script installs Piper in its own ignored package directory and downloads the voice. Existing Kokoro configuration is detected as requiring Piper setup. Caption start/end times and scene lengths come from the actual Piper PCM samples. Pace changes map to Piper's synthesis length scale.
-
-Passed: the documented setup script, all seven regression tests, and the opt-in `npm run test:piper` integration check. The latter generates real speech at two paces, checks WAV duration against the caption clock, verifies audible sample data and nonoverlapping captions, and rejects unsupported voices and invalid pace. A fresh embedded-Chrome trial generated Piper speech, previewed it, rendered an imported real recording with captions, and exported an MP4.
-
-The two published demonstration MP4s retain their original voices. Their narration provenance is now stated on the gallery page and in the README. Piper is used for new generation; no cloud voice API or subscription is involved.
+No environmental blocker prevented this delivery.

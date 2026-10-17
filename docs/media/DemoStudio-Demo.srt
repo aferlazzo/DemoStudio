@@ -1,147 +1,147 @@
 1
-00:00:00,000 --> 00:00:03,352
+00:00:00,000 --> 00:00:03,296
 Let me show you Demo Studio by using the real application.
 
 2
-00:00:03,495 --> 00:00:06,676
+00:00:03,439 --> 00:00:06,818
 It helps you turn a working app into a narrated video you can send
 
 3
-00:00:06,819 --> 00:00:09,943
+00:00:06,960 --> 00:00:09,874
 to testers, without asking them to install the app first.
 
 4
-00:00:10,398 --> 00:00:13,065
+00:00:10,328 --> 00:00:12,632
 Here, I'm preparing the SoHelpMe demonstration.
 
 5
-00:00:13,208 --> 00:00:16,293
+00:00:12,775 --> 00:00:16,247
 I load its project, which gives the video a name, keeps the
 
 6
-00:00:16,436 --> 00:00:19,484
+00:00:16,389 --> 00:00:19,479
 application address handy, and brings in the scene plan.
 
 7
-00:00:19,627 --> 00:00:22,065
+00:00:19,621 --> 00:00:22,153
 You can save that project and reuse it later.
 
 8
-00:00:22,520 --> 00:00:25,930
+00:00:22,607 --> 00:00:26,110
 Each scene says what to show, what to say, and how long to allow.
 
 9
-00:00:26,073 --> 00:00:28,035
+00:00:26,252 --> 00:00:28,319
 I review the refrigerator story here.
 
 10
-00:00:28,177 --> 00:00:31,301
+00:00:28,461 --> 00:00:31,820
 The script describes what the actual app does, including the
 
 11
-00:00:31,444 --> 00:00:33,577
+00:00:31,962 --> 00:00:33,977
 observation about two bottles touching.
 
 12
-00:00:34,033 --> 00:00:37,842
-Next, I choose a local American voice and generate the narration.
+00:00:34,431 --> 00:00:37,924
+Next, I use free Piper narration, right on this computer.
 
 13
-00:00:37,985 --> 00:00:41,871
-Demo Studio measures the spoken segments and uses those timings for
+00:00:38,066 --> 00:00:41,962
+No Microsoft service, subscription, or API key is needed.
 
 14
-00:00:42,014 --> 00:00:42,833
-captions.
+00:00:42,104 --> 00:00:44,719
+Demo Studio measures the speech for caption timing.
 
 15
-00:00:42,976 --> 00:00:45,376
-You can listen to the audio before continuing.
+00:00:44,861 --> 00:00:46,142
+Listen before continuing.
 
 16
-00:00:45,518 --> 00:00:48,261
-I've shortened the processing wait in this demonstration.
+00:00:46,285 --> 00:00:48,124
+I've shortened the processing wait here.
 
 17
-00:00:48,717 --> 00:00:52,317
+00:00:48,578 --> 00:00:52,267
 You can capture an application tab, or import an existing screen
 
 18
-00:00:52,460 --> 00:00:53,317
+00:00:52,409 --> 00:00:52,967
 recording.
 
 19
-00:00:53,460 --> 00:00:57,002
+00:00:53,110 --> 00:00:56,861
 I'm importing the real SoHelpMe interaction we just recorded.
 
 20
-00:00:57,145 --> 00:01:00,364
+00:00:57,003 --> 00:00:59,855
 The preview lets me check the picture before I create the finished
 
 21
-00:01:00,507 --> 00:01:01,269
+00:00:59,998 --> 00:01:00,525
 video.
 
 22
-00:01:01,724 --> 00:01:04,467
+00:01:00,979 --> 00:01:03,913
 This is the point to check framing and private details.
 
 23
-00:01:04,610 --> 00:01:07,982
+00:01:04,056 --> 00:01:07,166
 Optional crop controls and fixed black masks are available.
 
 24
-00:01:08,124 --> 00:01:11,420
+00:01:07,308 --> 00:01:10,491
 Once the picture looks right, I confirm the preview and continue.
 
 25
-00:01:11,875 --> 00:01:13,837
+00:01:10,945 --> 00:01:13,136
 Now I create the narrated preview.
 
 26
-00:01:13,980 --> 00:01:17,885
+00:01:13,278 --> 00:01:17,060
 Demo Studio combines the recording, spoken narration, and captions
 
 27
-00:01:18,027 --> 00:01:19,970
+00:01:17,203 --> 00:01:19,393
 into an MP4 on this computer.
 
 28
-00:01:20,113 --> 00:01:24,113
+00:01:19,536 --> 00:01:23,969
 After reviewing it, I choose Export MP4 to save the finished file.
 
 29
-00:01:24,568 --> 00:01:28,473
-Here is that resulting SoHelpMe video playing inside Demo Studio.
+00:01:24,423 --> 00:01:28,298
+Here is the resulting SoHelpMe video playing inside Demo Studio.
 
 30
-00:01:28,616 --> 00:01:32,654
-It contains the real problem description, real replies, generated
+00:01:28,440 --> 00:01:32,336
+It contains the real refrigerator conversation, practical replies,
 
 31
-00:01:32,797 --> 00:01:34,207
-narration, and captions.
+00:01:32,478 --> 00:01:34,224
+Piper narration, and captions.
 
 32
-00:01:34,349 --> 00:01:38,521
-The separate SoHelpMe MP4 is available to watch at full size and
+00:01:34,367 --> 00:01:38,066
+You can watch the separate MP4 at full size and share it with
 
 33
-00:01:38,664 --> 00:01:39,807
-share with testers.
+00:01:38,209 --> 00:01:38,901
+testers.
 
 34
-00:01:40,262 --> 00:01:43,938
+00:01:39,355 --> 00:01:43,054
 For ThinkAgain or Waiting Room Buddy, start another project, change
 
 35
-00:01:44,081 --> 00:01:47,986
+00:01:43,197 --> 00:01:47,247
 the app address and story, then capture or import its real workflow.
 
 36
-00:01:48,129 --> 00:01:51,043
+00:01:47,390 --> 00:01:50,562
 Generate the narration, review the result, and export.
 
 37
-00:01:51,186 --> 00:01:54,062
+00:01:50,704 --> 00:01:53,546
 Your next demonstration uses the same process.

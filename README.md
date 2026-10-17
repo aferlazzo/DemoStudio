@@ -25,7 +25,7 @@ For ThinkAgain, Waiting Room Buddy, or another app, change the project name, add
 
 ## Piper narration
 
-Piper 1.8.0 generates new narration locally with the American English LJ Speech voice. Setup installs its runtime and model once. Existing installations must run **Setup Narration.cmd** once to switch engines; old project files remain compatible. No paid service, subscription, or API key is required. The two already published demonstration MP4s retain their original Kokoro narration; the app now uses Piper for newly generated audio.
+Piper 1.8.0 generates new narration locally with the American English LJ Speech voice. Setup installs its runtime and model once. Existing installations must run **Setup Narration.cmd** once to switch engines; old project files remain compatible. No paid service, subscription, or API key is required. The current DemoStudio and SoHelpMe demonstration MP4s both use Piper. The walkthrough shows a real Piper generation request, render, export, and resulting video playback.
 
 Run `npm run test:piper` after setup to verify real voice generation, pace control, WAV duration, and caption timing. This optional integration test requires the local model; regular CI does not download it.
 
@@ -45,8 +45,8 @@ Editing, voice generation, and rendering run on this computer after setup. No ap
 
 ## Examples and verification
 
-- **DemoStudio-Demo.mp4:** 114.53 seconds; real project loading, scene editing, voice generation, source import, privacy controls, MP4 export, and resulting SoHelpMe playback. Processing waits are shortened.
-- **SoHelpMe-Demo.mp4:** 68.70 seconds; real refrigerator conversation and replies, local narration, captions, and the requested closing line.
+- **DemoStudio-Demo.mp4:** 114.00 seconds; real project loading, scene editing, voice generation, source import, privacy controls, MP4 export, and resulting SoHelpMe playback. Processing waits are shortened.
+- **SoHelpMe-Demo.mp4:** 74.27 seconds; real refrigerator conversation and replies, local narration, captions, and the requested closing line.
 
 Watch the [gallery](https://aferlazzo.github.io/DemoStudio/) or local `/demos/` page. [COMPLETION.md](COMPLETION.md) records tests, provenance, and limitations. Run `npm test` for scene/caption helpers, actual FFmpeg conversion, render validation, gallery byte ranges, and origin checks. CI runs on Windows. The voice model is not downloaded in CI.
 

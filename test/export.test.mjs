@@ -17,6 +17,7 @@ test('local server converts a generated codec test clip to playable H.264/AAC MP
     const range=await fetch(origin+'/demos/media/SoHelpMe-Demo.mp4',{headers:{Range:'bytes=0-31'}});assert.equal(range.status,206);const firstBytes=Buffer.from(await range.arrayBuffer());assert.equal(firstBytes.length,32);assert.equal(firstBytes.subarray(4,8).toString(),'ftyp');assert.match(range.headers.get('content-range'),/^bytes 0-31\//);
     assert.equal((await fetch(origin+'/demos/media/SoHelpMe-Demo.mp4',{headers:{Range:'bytes=999999999-'}})).status,416);
     assert.equal((await fetch(origin+'/demos/media/not-a-demo.mp4')).status,404);
+    assert.equal((await fetch(origin+'/demos/media/DemoStudio-Demo.mp4?v=piper12',{headers:{Range:'bytes=0-31'}})).status,206);
     assert.equal((await fetch(origin+'/narration/status')).status,200);
     for(const path of ['/narration','/narration/setup','/render'])assert.equal((await fetch(origin+path,{method:'POST',headers:{Origin:'https://example.org'},body:'bad'})).status,403);
     const rejected=await fetch(origin+'/convert',{method:'POST',headers:{Origin:'https://example.org'},body:'bad'});assert.equal(rejected.status,403);

@@ -1,95 +1,95 @@
 1
-00:00:00,000 --> 00:00:03,115
+00:00:00,000 --> 00:00:03,344
 Your refrigerator has picked up a new hobby: percussion.
 
 2
-00:00:03,275 --> 00:00:06,581
+00:00:03,504 --> 00:00:07,706
 Let's use SoHelpMe to work through an unfamiliar rattle, one
 
 3
-00:00:06,741 --> 00:00:08,235
+00:00:07,866 --> 00:00:09,422
 observation at a time.
 
 4
-00:00:08,745 --> 00:00:11,795
+00:00:09,932 --> 00:00:12,858
 I describe the intermittent rattling and mention that the
 
 5
-00:00:11,955 --> 00:00:13,790
+00:00:13,018 --> 00:00:15,084
 refrigerator still seems cold.
 
 6
-00:00:13,950 --> 00:00:15,401
+00:00:15,244 --> 00:00:16,835
 Plain language is enough.
 
 7
-00:00:15,561 --> 00:00:18,761
+00:00:16,995 --> 00:00:20,513
 I don't need to know the name of a single refrigerator part.
 
 8
-00:00:19,271 --> 00:00:20,636
+00:00:21,023 --> 00:00:22,462
 Now I choose Get help.
 
 9
-00:00:20,796 --> 00:00:24,679
+00:00:22,622 --> 00:00:27,116
 SoHelpMe responds with a practical first check and asks for more
 
 10
-00:00:24,839 --> 00:00:28,849
+00:00:27,276 --> 00:00:31,954
 information, instead of expecting me to arrive with a diagnosis.
 
 11
-00:00:29,359 --> 00:00:32,602
+00:00:32,464 --> 00:00:36,075
 Here, the response points to items that may be touching or
 
 12
-00:00:32,762 --> 00:00:35,343
+00:00:36,235 --> 00:00:38,998
 vibrating, and asks what changes the rattle.
 
 13
-00:00:35,503 --> 00:00:39,066
+00:00:39,158 --> 00:00:42,746
 I can read the suggestion and answer what I actually notice.
 
 14
-00:00:39,576 --> 00:00:42,968
+00:00:43,256 --> 00:00:47,528
 For this demonstration, I report that two glass bottles were
 
 15
-00:00:43,128 --> 00:00:44,579
+00:00:47,688 --> 00:00:49,163
 touching inside the door.
 
 16
-00:00:44,739 --> 00:00:48,216
+00:00:49,323 --> 00:00:53,200
 Separating them stopped the rattle, and the refrigerator is still
 
 17
-00:00:48,376 --> 00:00:49,464
+00:00:53,360 --> 00:00:54,312
 cooling normally.
 
 18
-00:00:49,974 --> 00:00:53,750
+00:00:54,822 --> 00:00:58,387
 The follow-up recommends keeping the bottles apart and monitoring
 
 19
-00:00:53,910 --> 00:00:55,382
+00:00:58,547 --> 00:01:00,033
 whether the sound returns.
 
 20
-00:00:55,542 --> 00:00:59,510
+00:01:00,193 --> 00:01:04,349
 That's a useful next step for this example, with room to continue if
 
 21
-00:00:59,670 --> 00:01:00,993
+00:01:04,509 --> 00:01:05,891
 the problem changes.
 
 22
-00:01:01,503 --> 00:01:05,449
+00:01:06,401 --> 00:01:10,801
 A clearer description, a useful question, and a practical next step.
 
 23
-00:01:05,609 --> 00:01:06,569
+00:01:10,961 --> 00:01:11,924
 SoHelpMe.
 
 24
-00:01:06,729 --> 00:01:08,180
+00:01:12,084 --> 00:01:13,733
 A little help when you need it.

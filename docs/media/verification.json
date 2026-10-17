@@ -1,0 +1,24 @@
+{
+  "engine": "piper",
+  "engineVersion": "1.8.0",
+  "voice": "en_US-ljspeech-high",
+  "sampleRate": 22050,
+  "videos": {
+    "DemoStudio-Demo.mp4": {
+      "bytes": 2753188,
+      "sha256": "3a61e426506b4540ca18963f795453ebaf01b7e6f8c295cf66de1080fb260838"
+    },
+    "SoHelpMe-Demo.mp4": {
+      "bytes": 2103035,
+      "sha256": "d8046cb587e916b07f0982f46dc16197c2bb5f74d334bec07e6d1ba99260a6ba"
+    },
+    "DemoStudio-Narration.wav": {
+      "bytes": 5027478,
+      "sha256": "37182698a0fc56e1336c379f88b83eeb30f6c7f41473a5b0b3688302efb54d96"
+    },
+    "SoHelpMe-Narration.wav": {
+      "bytes": 3274162,
+      "sha256": "cf6183f79772b86ac56c22491b55d5a3818650797ab70a4d6738518257e4e588"
+    }
+  }
+}

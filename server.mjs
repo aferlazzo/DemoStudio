@@ -14,7 +14,7 @@ const server=http.createServer(async(req,res)=>{
   res.setHeader('X-Content-Type-Options','nosniff');
   if(req.headers.host!==`127.0.0.1:${port}`&&req.headers.host!==`localhost:${port}`){res.writeHead(403);res.end('Local access only');return;}
   if(req.method==='GET'&&req.url==='/demos'){res.writeHead(302,{Location:'/demos/'});res.end();return;}
-  const demoPath=(req.url||'').replace(/^\/demos\/$/,'/demos/index.html');
+  const demoPath=(req.url||'').split('?')[0].replace(/^\/demos\/$/,'/demos/index.html');
   const demoFiles=new Map([['/demos/index.html','index.html'],['/demos/media/SoHelpMe-Demo.mp4','media/SoHelpMe-Demo.mp4'],['/demos/media/DemoStudio-Demo.mp4','media/DemoStudio-Demo.mp4'],['/demos/media/SoHelpMe-Demo.srt','media/SoHelpMe-Demo.srt'],['/demos/media/DemoStudio-Demo.srt','media/DemoStudio-Demo.srt']]);
   if(req.method==='GET'&&demoFiles.has(demoPath)){
     try{const file=demoFiles.get(demoPath),data=await readFile(join(root,'../docs',file));const headers={'Content-Type':file.endsWith('.mp4')?'video/mp4':file.endsWith('.srt')?'text/plain; charset=utf-8':'text/html; charset=utf-8','Accept-Ranges':'bytes'};
