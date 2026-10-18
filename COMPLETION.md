@@ -46,3 +46,9 @@ No environmental blocker prevented this delivery.
 ## Published playback and download checks
 
 GitHub Pages deployed the Piper videos successfully, and Windows CI passed for the delivery commit. Both public gallery MP4 URLs returned HTTP 200 with video/mp4; their bytes matched the verified local originals. All four v1.2.0 release assets (two MP4s and two WAVs) were downloaded independently and matched as well. Embedded Chrome reported advancing video time, readyState 4, correct dimensions/durations, audio enabled, and no media errors. Gallery playback was checked locally and publicly. Starting the second gallery video now pauses the first automatically; that behavior was also exercised in embedded Chrome.
+
+## Resumed final public review — October 17, 2026
+
+After the usage-limit interruption, the published page was refreshed to load the final deployed gallery script. Audio exclusivity passed in both directions: starting SoHelpMe paused DemoStudio, then starting DemoStudio paused SoHelpMe. The DemoStudio walkthrough was played at its normal speed from the beginning through all 114 seconds on the public website. At completion the browser reported currentTime 114, duration 114, ended true, paused true, readyState 4, muted false, and no media error. This completes the public end-to-end playback check; the already verified MP4/WAV files were not rebuilt.
+
+The final runtime commit (60a8991) had successful Windows verification and GitHub Pages deployment jobs. No additional application or media defect was found during this review. The imported-footage → local Piper WAV/captions → rendered MP4 → playback/export workflow and the public watch/download page are operational and tester-ready. Direct OS screen/microphone capture still has the browser-dependent, unverified scope documented above; this review does not claim that every capture path was tested.
