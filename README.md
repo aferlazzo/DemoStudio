@@ -49,7 +49,7 @@ Capture the app window at its native size with readable text. Avoid enlarging an
 
 ## Examples and verification
 
-- **DemoStudio-Demo.mp4:** 114.00 seconds; real project loading, scene editing, voice generation, source import, privacy controls, MP4 export, and resulting SoHelpMe playback. Processing waits are shortened.
+- **DemoStudio-Demo.mp4:** 117.53 seconds; real project loading, scene editing, voice generation, source import, privacy controls, MP4 export, resulting SoHelpMe playback, and the finished public watch/download page with copyright footer. Processing waits are shortened.
 - **SoHelpMe-Demo.mp4:** 74.27 seconds; real refrigerator conversation and replies, local narration, captions, and the requested closing line.
 
 Watch the [gallery](https://aferlazzo.github.io/DemoStudio/) or local `/demos/` page. [COMPLETION.md](COMPLETION.md) records tests, provenance, and limitations. Run `npm test` for scene/caption helpers, actual FFmpeg conversion, render validation, gallery byte ranges, and origin checks. CI runs on Windows. The voice model is not downloaded in CI.

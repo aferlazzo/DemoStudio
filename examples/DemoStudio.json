@@ -63,10 +63,10 @@
       "action": "Play the actual exported SoHelpMe MP4."
     },
     {
-      "duration": 14.64518623561341,
+      "duration": 18.176734693877552,
       "title": "Use it for your next application",
-      "text": "For ThinkAgain or Waiting Room Buddy, start another project, change the app address and story, then capture or import its real workflow. Generate the narration, review the result, and export. Your next demonstration uses the same process.",
-      "action": "Show the reusable project settings after completing the real SoHelpMe export."
+      "text": "For ThinkAgain or Waiting Room Buddy, change the app address and story, then repeat these steps. The finished watch page lets you play either demo full screen or download its MP4. Starting one video pauses the other. Your copyright notice appears at the bottom. You're ready to share.",
+      "action": "Show reusable project settings, the public full-screen/download controls, playback switching, and the copyright footer."
     }
   ]
 }

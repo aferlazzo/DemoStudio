@@ -61,3 +61,10 @@ The user reported blurry screens. Inspection found that blur was already baked i
 The final tutorial remains exactly 114 seconds. Its AAC narration packet hash is identical to the previous verified video (`233d12119c10397d23264dc66fedd354cfbbae9831a457eb5b3842cb248e9a4a`), and the caption timeline/SRT and WAV narration are unchanged. The separate published SoHelpMe MP4 is unchanged. A fresh in-app SoHelpMe render/export was recorded for the replacement tutorial footage.
 
 The new video decoded fully without errors. Representative project/editor, narration, and enlarged-playback frames were checked at native resolution against the softened original. All seven regression tests passed with the new export settings. Current file size/hash and capture details are in docs/media/verification.json.
+
+
+## Finished-app demonstration update — October 18, 2026
+
+The current DemoStudio-Demo.mp4 is 117.53 seconds. The first eight verified scenes remain intact; the closing section now shows the finished public watch page, full-screen SoHelpMe playback, download controls, switching players, and the copyright footer. New closing narration was generated with the same free local Piper voice and synchronized using its WAV sample timing. The separate SoHelpMe MP4 is unchanged.
+
+The complete replacement MP4 decoded without errors; its AAC track has mean volume -19.2 dB and peak -1.4 dB. Offline speech recognition checked the new narration, and representative caption/footer frames were visually inspected. All seven automated regression tests passed with localhost access enabled. Current hashes and revision details are recorded in docs/media/verification.json.

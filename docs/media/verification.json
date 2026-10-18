@@ -5,16 +5,16 @@
   "sampleRate": 22050,
   "videos": {
     "DemoStudio-Demo.mp4": {
-      "bytes": 3749121,
-      "sha256": "815bc028788b776752eac8cc5dd899936c790841ba025099c3264ab4f6d2c227"
+      "bytes": 4181662,
+      "sha256": "2fded42c52c7c5b0ef7ff429688807bf11647423e5f1c76c5e0ccdc87cbe70b1"
     },
     "SoHelpMe-Demo.mp4": {
       "bytes": 2103035,
       "sha256": "d8046cb587e916b07f0982f46dc16197c2bb5f74d334bec07e6d1ba99260a6ba"
     },
     "DemoStudio-Narration.wav": {
-      "bytes": 5027478,
-      "sha256": "37182698a0fc56e1336c379f88b83eeb30f6c7f41473a5b0b3688302efb54d96"
+      "bytes": 5183186,
+      "sha256": "58da53970eae3e128d164361374998de44493dd9eae780d6dfc3f1eab8b96648"
     },
     "SoHelpMe-Narration.wav": {
       "bytes": 3274162,
@@ -33,5 +33,16 @@
     "finalCrf": 16,
     "scaler": "lanczos",
     "audioPacketSha256": "233d12119c10397d23264dc66fedd354cfbbae9831a457eb5b3842cb248e9a4a"
+  },
+  "finishedAppRevision": {
+    "date": "2026-10-18",
+    "duration": 117.53156462585034,
+    "narration": "Existing verified Piper narration retained for the first eight scenes; new local Piper narration for the finished-app closing section.",
+    "footage": "Actual finished public watch page: full-screen playback, download controls, switching players, copyright footer.",
+    "audioMeanDb": -19.2,
+    "audioPeakDb": -1.4,
+    "fullDecode": "passed",
+    "captionTiming": "Measured against generated WAV samples",
+    "regressionTests": "7 passed"
   }
 }

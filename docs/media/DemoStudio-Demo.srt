@@ -131,17 +131,29 @@ You can watch the separate MP4 at full size and share it with
 testers.
 
 34
-00:01:39,355 --> 00:01:43,054
-For ThinkAgain or Waiting Room Buddy, start another project, change
+00:01:39,355 --> 00:01:43,035
+For ThinkAgain or Waiting Room Buddy, change the app address and
 
 35
-00:01:43,197 --> 00:01:47,247
-the app address and story, then capture or import its real workflow.
+00:01:43,195 --> 00:01:45,401
+story, then repeat these steps.
 
 36
-00:01:47,390 --> 00:01:50,562
-Generate the narration, review the result, and export.
+00:01:45,561 --> 00:01:49,300
+The finished watch page lets you play either demo full screen or
 
 37
-00:01:50,704 --> 00:01:53,546
-Your next demonstration uses the same process.
+00:01:49,460 --> 00:01:50,911
+download its MP4.
+
+38
+00:01:51,071 --> 00:01:53,219
+Starting one video pauses the other.
+
+39
+00:01:53,379 --> 00:01:55,701
+Your copyright notice appears at the bottom.
+
+40
+00:01:55,861 --> 00:01:57,022
+You're ready to share.
