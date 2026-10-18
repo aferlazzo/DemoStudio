@@ -6,7 +6,7 @@ Completed in the existing aferlazzo/DemoStudio repository on October 17, 2026. O
 
 | File | Duration | Format | Bytes |
 | --- | --- | --- | --- |
-| DemoStudio-Demo.mp4 | 114.00 seconds | H.264, 1280×900, 30 fps; AAC mono 22,050 Hz | 2,753,188 |
+| DemoStudio-Demo.mp4 | 114.00 seconds | H.264, 1280×900, 30 fps; AAC mono 22,050 Hz | 3,749,121 |
 | SoHelpMe-Demo.mp4 | 74.27 seconds | H.264, 1280×900, 30 fps; AAC mono 22,050 Hz | 2,103,035 |
 | DemoStudio-Narration.wav | 114.00 seconds | PCM signed 16-bit mono, 22,050 Hz | 5,027,478 |
 | SoHelpMe-Narration.wav | 74.24 seconds | PCM signed 16-bit mono, 22,050 Hz | 3,274,162 |
@@ -17,7 +17,7 @@ Both current videos use locally installed Piper 1.8.0 with the American English 
 
 Fresh footage of the existing DemoStudio application: load the SoHelpMe project, review scene text, request real Piper generation, preview its WAV, import actual SoHelpMe footage, review crop/privacy controls, render a real MP4, download that file using Export MP4, play it inside DemoStudio, and return to reusable project settings. Narration explains repeating the workflow for ThinkAgain and Waiting Room Buddy. This is a full 114-second demonstration, not the earlier short voice smoke test.
 
-Footage consists of continuous browser viewport captures during actual interactions. No fictional interface, invented app response, desktop account screen, or storyboard is substituted. The embedded capture interface sampled the new walkthrough at about three distinct frames per second; the MP4 is encoded at 30 fps. Actual UI footage is cropped to remove empty capture padding. Processing waits are shortened and the narration says so. Scene footage is retimed to its spoken section. Opening/closing fades and open captions are applied by DemoStudio's media renderer.
+Footage consists of continuous browser viewport captures during actual interactions. No fictional interface, invented app response, desktop account screen, or storyboard is substituted. The current clarity revision uses native browser PNG captures at roughly nine distinct frames per second; the MP4 is encoded at 30 fps. It replaces the softened, oversized captures used in the prior revision. The nested SoHelpMe playback expands to actual full-screen video so its text is larger. Processing waits are shortened and the narration says so. Scene footage is retimed to its spoken section. Opening/closing fades and open captions are applied by DemoStudio's media renderer.
 
 The SoHelpMe source is the previously recorded real refrigerator conversation. It is retimed to its new Piper narration. Its first real reply recommends checking items that could vibrate and reporting the result; the example observation concerns touching bottles. The real follow-up recommends keeping them separated and monitoring for recurrence. Its requested closing line is preserved. The final SoHelpMe MP4 is the exact file downloaded through the working app's Export MP4 button.
 
@@ -52,3 +52,12 @@ GitHub Pages deployed the Piper videos successfully, and Windows CI passed for t
 After the usage-limit interruption, the published page was refreshed to load the final deployed gallery script. Audio exclusivity passed in both directions: starting SoHelpMe paused DemoStudio, then starting DemoStudio paused SoHelpMe. The DemoStudio walkthrough was played at its normal speed from the beginning through all 114 seconds on the public website. At completion the browser reported currentTime 114, duration 114, ended true, paused true, readyState 4, muted false, and no media error. This completes the public end-to-end playback check; the already verified MP4/WAV files were not rebuilt.
 
 The final runtime commit (60a8991) had successful Windows verification and GitHub Pages deployment jobs. No additional application or media defect was found during this review. The imported-footage → local Piper WAV/captions → rendered MP4 → playback/export workflow and the public watch/download page are operational and tester-ready. Direct OS screen/microphone capture still has the browser-dependent, unverified scope documented above; this review does not claim that every capture path was tested.
+
+
+## Clarity revision — October 18, 2026
+
+The user reported blurry screens. Inspection found that blur was already baked into the previous oversized browser captures. The complete DemoStudio tutorial was refilmed from actual UI interactions using crisp native-size PNG captures, with 1,192 distinct source frames across 131 seconds before scene timing is applied. No synthetic screens or AI sharpening were used. The nested SoHelpMe player is enlarged through its real full-screen mode. A lossless 4:4:4 intermediate avoids an extra lossy encode; final exports use Lanczos scaling and H.264 CRF 16 to preserve small text. The watch page now has labeled full-screen buttons.
+
+The final tutorial remains exactly 114 seconds. Its AAC narration packet hash is identical to the previous verified video (`233d12119c10397d23264dc66fedd354cfbbae9831a457eb5b3842cb248e9a4a`), and the caption timeline/SRT and WAV narration are unchanged. The separate published SoHelpMe MP4 is unchanged. A fresh in-app SoHelpMe render/export was recorded for the replacement tutorial footage.
+
+The new video decoded fully without errors. Representative project/editor, narration, and enlarged-playback frames were checked at native resolution against the softened original. All seven regression tests passed with the new export settings. Current file size/hash and capture details are in docs/media/verification.json.

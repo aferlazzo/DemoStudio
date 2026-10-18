@@ -33,6 +33,10 @@ Run `npm run test:piper` after setup to verify real voice generation, pace contr
 
 Editing, voice generation, and rendering run on this computer after setup. No app credentials are requested and no recordings are uploaded by DemoStudio. Initial setup downloads dependencies from npm, PyPI, and the model’s official GitHub release. `.local/`, environment files, generated audio, and private recordings are excluded from Git. Only the two reviewed public MP4 examples in `docs/media/` are committed.
 
+## Clear screen recordings
+
+Capture the app window at its native size with readable text. Avoid enlarging an already small or blurred recording; export cannot recover details missing from the source. The encoder uses high-quality scaling and a higher-quality H.264 setting to preserve small text. Use the player’s full-screen button or the downloaded MP4 when reviewing detailed controls.
+
 ## Practical limits
 
 - Imported recordings require generated narration or an imported voiceover. Microphone and silent modes are for live capture. A short imported source holds its last frame until narration ends; a longer source is cut at the script’s end. There is no timeline editor for rearranging clips.

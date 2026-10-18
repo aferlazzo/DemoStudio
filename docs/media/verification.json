@@ -5,8 +5,8 @@
   "sampleRate": 22050,
   "videos": {
     "DemoStudio-Demo.mp4": {
-      "bytes": 2753188,
-      "sha256": "3a61e426506b4540ca18963f795453ebaf01b7e6f8c295cf66de1080fb260838"
+      "bytes": 3749121,
+      "sha256": "815bc028788b776752eac8cc5dd899936c790841ba025099c3264ab4f6d2c227"
     },
     "SoHelpMe-Demo.mp4": {
       "bytes": 2103035,
@@ -20,5 +20,18 @@
       "bytes": 3274162,
       "sha256": "cf6183f79772b86ac56c22491b55d5a3818650797ab70a4d6738518257e4e588"
     }
+  },
+  "clarityRevision": {
+    "date": "2026-10-18",
+    "capture": "native browser PNG",
+    "captureWidth": 1265,
+    "captureHeight": 711,
+    "sourceFrames": 1192,
+    "timelineSeconds": 114,
+    "sourceSeconds": 131,
+    "intermediate": "lossless H.264 4:4:4",
+    "finalCrf": 16,
+    "scaler": "lanczos",
+    "audioPacketSha256": "233d12119c10397d23264dc66fedd354cfbbae9831a457eb5b3842cb248e9a4a"
   }
 }

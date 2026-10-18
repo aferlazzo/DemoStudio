@@ -42,11 +42,11 @@ export async function renderMovie(form){
   let dir;try{dir=await mkdtemp(join(tmpdir(),'demo-render-'));await writeFile(join(dir,'source.video'),Buffer.from(await video.arrayBuffer()));await writeFile(join(dir,'voice.audio'),Buffer.from(await audio.arrayBuffer()));
     await writeFile(join(dir,'captions.srt'),srt(cues,duration));
     const crop=project.crop||{};const n=k=>Math.max(0,Math.min(45,Number(crop[k])||0))/100;
-    let filters=[`crop=iw*${1-n('left')-n('right')}:ih*${1-n('top')-n('bottom')}:iw*${n('left')}:ih*${n('top')}`,'scale=1280:800:force_original_aspect_ratio=decrease','pad=1280:900:(ow-iw)/2:(800-ih)/2:color=0x101715','setsar=1',`tpad=stop_mode=clone:stop_duration=${duration}`];
+    let filters=[`crop=iw*${1-n('left')-n('right')}:ih*${1-n('top')-n('bottom')}:iw*${n('left')}:ih*${n('top')}`,'scale=1280:800:force_original_aspect_ratio=decrease:flags=lanczos','pad=1280:900:(ow-iw)/2:(800-ih)/2:color=0x101715','setsar=1',`tpad=stop_mode=clone:stop_duration=${duration}`];
     for(const m of (project.masks||[]).slice(0,20)){const val=k=>Math.max(0,Math.min(100,Number(m[k])||0))/100;filters.push(`drawbox=x=iw*${val('x')}:y=800*${val('y')}:w=iw*${val('w')}:h=800*${val('h')}:color=black:t=fill`);}
     if(project.captions!==false&&cues.length)filters.push("subtitles=captions.srt:force_style='FontName=Arial,FontSize=12,MarginV=8,Outline=1,Shadow=0,Alignment=2'");
     if(project.fade!==false)filters.push('fade=t=in:st=0:d=0.35',`fade=t=out:st=${Math.max(0,duration-.5)}:d=0.5`);
-    await runProcess(ffmpeg,['-hide_banner','-loglevel','error','-i','source.video','-i','voice.audio','-map','0:v:0','-map','1:a:0','-vf',filters.join(','),'-t',String(duration),'-r','30','-c:v','libx264','-preset','veryfast','-crf','19','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-af','apad','-movflags','+faststart','-y','preview.mp4'],{cwd:dir});
+    await runProcess(ffmpeg,['-hide_banner','-loglevel','error','-i','source.video','-i','voice.audio','-map','0:v:0','-map','1:a:0','-vf',filters.join(','),'-t',String(duration),'-r','30','-c:v','libx264','-preset','veryfast','-crf','16','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-af','apad','-movflags','+faststart','-y','preview.mp4'],{cwd:dir});
     return await readFile(join(dir,'preview.mp4'));
   }finally{if(dir)await rm(dir,{recursive:true,force:true});}
 }

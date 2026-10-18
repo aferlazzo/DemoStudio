@@ -43,7 +43,7 @@ const server=http.createServer(async(req,res)=>{
       const input=join(dir,'capture.webm'),output=join(dir,'demo.mp4');
       await writeFile(input,Buffer.concat(chunks));
       await new Promise((resolve,reject)=>{
-        const child=spawn(ffmpeg,['-hide_banner','-loglevel','error','-i',input,'-c:v','libx264','-preset','veryfast','-crf','20','-pix_fmt','yuv420p','-c:a','aac','-b:a','160k','-movflags','+faststart','-y',output],{windowsHide:true});
+        const child=spawn(ffmpeg,['-hide_banner','-loglevel','error','-i',input,'-c:v','libx264','-preset','veryfast','-crf','16','-pix_fmt','yuv420p','-c:a','aac','-b:a','160k','-movflags','+faststart','-y',output],{windowsHide:true});
         let err='';const timeout=setTimeout(()=>{child.kill();reject(new Error('Conversion timed out after five minutes.'));},300000);
         child.stderr.on('data',b=>{err=(err+b.toString()).slice(-3000);});
         child.on('error',e=>{clearTimeout(timeout);reject(e);});
