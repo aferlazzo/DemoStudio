@@ -20,7 +20,7 @@ const server=http.createServer(async(req,res)=>{
     try{const file=demoFiles.get(demoPath),data=await readFile(join(root,'../docs',file));const headers={'Content-Type':file.endsWith('.mp4')?'video/mp4':file.endsWith('.srt')?'text/plain; charset=utf-8':'text/html; charset=utf-8','Accept-Ranges':'bytes'};
       if(req.headers.range){const match=/^bytes=(\d+)-(\d*)$/.exec(req.headers.range),start=Number(match?.[1]),end=match?.[2]?Number(match[2]):data.length-1;if(!match||start>end||start>=data.length||end>=data.length){res.writeHead(416,{'Content-Range':`bytes */${data.length}`});res.end();return;}const part=data.subarray(start,end+1);res.writeHead(206,{...headers,'Content-Length':part.length,'Content-Range':`bytes ${start}-${end}/${data.length}`});res.end(part);return;}
       res.writeHead(200,{...headers,'Content-Length':data.length});res.end(data);
-    }catch{res.writeHead(404);res.end('Demo file not available. Watch the published videos at https://aferlazzo.github.io/DemoStudio/');}return;
+    }catch{res.writeHead(404);res.end('Demo file not available. Watch the published videos at https://aferlazzo.github.io/demoMaker/');}return;
   }
   if(req.method==='GET'&&req.url==='/narration/status'){res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({ready:await speechReady()}));return;}
   if(req.method==='POST'&&['/narration','/narration/setup','/render'].includes(req.url)){
@@ -59,7 +59,7 @@ const server=http.createServer(async(req,res)=>{
 });
 server.listen(port,'127.0.0.1',()=>{
   const url=`http://127.0.0.1:${port}`;
-  console.log(`Demo Studio: ${url}`);
+  console.log(`demoMaker: ${url}`);
   if(process.argv.includes('--open')&&process.platform==='win32'){
     const browser=spawn('rundll32.exe',['url.dll,FileProtocolHandler',url],{windowsHide:true,detached:true,stdio:'ignore'});
     browser.on('error',()=>console.log(`Open ${url} in Chrome or Edge.`));

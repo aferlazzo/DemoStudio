@@ -13,7 +13,7 @@ test('local server converts a generated codec test clip to playable H.264/AAC MP
   try{
     await new Promise((resolve,reject)=>{server.stdout.once('data',resolve);server.once('error',reject);server.once('exit',code=>reject(new Error('Server exited '+code)));});
     assert.equal((await fetch(origin)).status,200);
-    assert.match(await (await fetch(origin+'/demos/')).text(),/DemoStudio demonstrates itself/);
+    assert.match(await (await fetch(origin+'/demos/')).text(),/demoMaker demonstrates itself/);
     const range=await fetch(origin+'/demos/media/SoHelpMe-Demo.mp4',{headers:{Range:'bytes=0-31'}});assert.equal(range.status,206);const firstBytes=Buffer.from(await range.arrayBuffer());assert.equal(firstBytes.length,32);assert.equal(firstBytes.subarray(4,8).toString(),'ftyp');assert.match(range.headers.get('content-range'),/^bytes 0-31\//);
     assert.equal((await fetch(origin+'/demos/media/SoHelpMe-Demo.mp4',{headers:{Range:'bytes=999999999-'}})).status,416);
     assert.equal((await fetch(origin+'/demos/media/not-a-demo.mp4')).status,404);

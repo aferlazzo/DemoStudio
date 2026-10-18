@@ -1,14 +1,16 @@
-# DemoStudio
+# demoMaker
 
-Make narrated demonstration videos of your real applications. DemoStudio combines genuine footage, free local Piper narration, and timed captions into a shareable H.264/AAC MP4. No API key, paid voice subscription, or account is needed.
+Formerly DemoStudio. Existing project files, launcher, and released video filenames remain compatible. Earlier demonstration footage uses the original name.
 
-**[Watch DemoStudio explain itself, then watch its SoHelpMe demo](https://aferlazzo.github.io/DemoStudio/).** Both finished videos can be watched and downloaded without installing anything. DemoStudio itself runs locally; the public page is the video gallery.
+Make narrated demonstration videos of your real applications. demoMaker combines genuine footage, free local Piper narration, and timed captions into a shareable H.264/AAC MP4. No API key, paid voice subscription, or account is needed.
+
+**[Watch demoMaker explain itself, then watch its SoHelpMe demo](https://aferlazzo.github.io/demoMaker/).** Both finished videos can be watched and downloaded without installing anything. demoMaker itself runs locally; the public page is the video gallery.
 
 ## Start on Windows
 
 1. Download this repository using **Code → Download ZIP**, and extract it. Install **Node.js 20 or newer** from [nodejs.org](https://nodejs.org/) if needed.
 2. Double-click **Start Demo Studio.cmd**. First launch downloads the video dependency. Keep its terminal window open.
-3. Open **http://127.0.0.1:4317/** in desktop Chrome, Edge, or the embedded browser. Choose **Watch Demo Studio in action** for the finished walkthrough.
+3. Open **http://127.0.0.1:4317/** in desktop Chrome, Edge, or the embedded browser. Choose **Watch demoMaker in action** for the finished walkthrough.
 4. To generate voices, install **Python 3.10–3.12** from [python.org](https://www.python.org/downloads/) if needed. In Narration, choose **Set up narration · one-time download**. Alternatively double-click **Setup Narration.cmd**. Setup downloads roughly 200 MB; allow several minutes and an internet connection.
 
 Do not open `public/index.html` directly. The app needs its local server. Stop the server with Ctrl+C. Advanced launch: `npm ci`, then `npm start`. The server listens only on this computer.
@@ -25,13 +27,13 @@ For ThinkAgain, Waiting Room Buddy, or another app, change the project name, add
 
 ## Piper narration
 
-Piper 1.8.0 generates new narration locally with the American English LJ Speech voice. Setup installs its runtime and model once. Existing installations must run **Setup Narration.cmd** once to switch engines; old project files remain compatible. No paid service, subscription, or API key is required. The current DemoStudio and SoHelpMe demonstration MP4s both use Piper. The walkthrough shows a real Piper generation request, render, export, and resulting video playback.
+Piper 1.8.0 generates new narration locally with the American English LJ Speech voice. Setup installs its runtime and model once. Existing installations must run **Setup Narration.cmd** once to switch engines; old project files remain compatible. No paid service, subscription, or API key is required. The current demoMaker and SoHelpMe demonstration MP4s both use Piper. The walkthrough shows a real Piper generation request, render, export, and resulting video playback.
 
 Run `npm run test:piper` after setup to verify real voice generation, pace control, WAV duration, and caption timing. This optional integration test requires the local model; regular CI does not download it.
 
 ## Privacy
 
-Editing, voice generation, and rendering run on this computer after setup. No app credentials are requested and no recordings are uploaded by DemoStudio. Initial setup downloads dependencies from npm, PyPI, and the model’s official GitHub release. `.local/`, environment files, generated audio, and private recordings are excluded from Git. Only the two reviewed public MP4 examples in `docs/media/` are committed.
+Editing, voice generation, and rendering run on this computer after setup. No app credentials are requested and no recordings are uploaded by demoMaker. Initial setup downloads dependencies from npm, PyPI, and the model’s official GitHub release. `.local/`, environment files, generated audio, and private recordings are excluded from Git. Only the two reviewed public MP4 examples in `docs/media/` are committed.
 
 ## Clear screen recordings
 
@@ -52,7 +54,7 @@ Capture the app window at its native size with readable text. Avoid enlarging an
 - **DemoStudio-Demo.mp4:** 117.53 seconds; real project loading, scene editing, voice generation, source import, privacy controls, MP4 export, resulting SoHelpMe playback, and the finished public watch/download page with copyright footer. Processing waits are shortened.
 - **SoHelpMe-Demo.mp4:** 74.27 seconds; real refrigerator conversation and replies, local narration, captions, and the requested closing line.
 
-Watch the [gallery](https://aferlazzo.github.io/DemoStudio/) or local `/demos/` page. [COMPLETION.md](COMPLETION.md) records tests, provenance, and limitations. Run `npm test` for scene/caption helpers, actual FFmpeg conversion, render validation, gallery byte ranges, and origin checks. CI runs on Windows. The voice model is not downloaded in CI.
+Watch the [gallery](https://aferlazzo.github.io/demoMaker/) or local `/demos/` page. [COMPLETION.md](COMPLETION.md) records tests, provenance, and limitations. Run `npm test` for scene/caption helpers, actual FFmpeg conversion, render validation, gallery byte ranges, and origin checks. CI runs on Windows. The voice model is not downloaded in CI.
 
 ## Components
 

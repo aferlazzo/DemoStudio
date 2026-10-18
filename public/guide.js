@@ -5,7 +5,7 @@ export function mountGuide(getState){
   document.querySelector('.intro h1').textContent='Let’s make your next demo.';
   document.querySelector('.intro p:last-child').textContent='Five guided steps, from a real app to a finished video.';
   const introActions=document.createElement('div');introActions.className='intro-actions';
-  const watch=document.createElement('a');watch.className='button';watch.href='/demos#studio';watch.target='_blank';watch.rel='noopener';watch.textContent='▶ Watch Demo Studio in action';introActions.append(watch);
+  const watch=document.createElement('a');watch.className='button';watch.href='/demos#studio';watch.target='_blank';watch.rel='noopener';watch.textContent='▶ Watch demoMaker in action';introActions.append(watch);
   const tourStart=document.createElement('button');tourStart.className='secondary';tourStart.textContent='Take a quick interface tour';tourStart.id='tourStart';
   const presetButton=$('preset');presetButton.textContent='Try the SoHelpMe example';introActions.append(tourStart,presetButton);document.querySelector('.intro').append(introActions);
   const layout=document.querySelector('.layout'),stage=document.querySelector('.stage');
@@ -24,7 +24,7 @@ export function mountGuide(getState){
   const story=$('stepStory'),sound=$('stepSound'),capture=$('stepCapture'),record=$('stepRecord'),exportPage=$('stepExport');
   story.append(panels[0]);
   const options=document.createElement('details');options.className='script-details';const optionsSummary=document.createElement('summary');optionsSummary.textContent='Optional: recording length and picture size';options.append(optionsSummary,panels[0].querySelector('.row'));panels[0].append(options);
-  const explainer=document.createElement('div');explainer.className='guide-tip';explainer.innerHTML='<strong>New here? Watch the finished example first.</strong><p>Choose <b>Watch Demo Studio in action</b> above to see a real project become a narrated MP4. Then give your own video a name and app address below. The SoHelpMe example supplies a starting script; review it against your app’s actual responses.</p><p id="storySummary"></p>';
+  const explainer=document.createElement('div');explainer.className='guide-tip';explainer.innerHTML='<strong>New here? Watch the finished example first.</strong><p>Choose <b>Watch demoMaker in action</b> above to see a real project become a narrated MP4. Then give your own video a name and app address below. The SoHelpMe example supplies a starting script; review it against your app’s actual responses.</p><p id="storySummary"></p>';
   story.prepend(explainer);
   const script=document.querySelector('.script'),details=document.createElement('details');details.className='script-details';const summary=document.createElement('summary');summary.textContent='Review or edit the narration and scene timing';details.append(summary,script);story.append(details);
   const projectTools=document.querySelector('.script .section-title .transport');script.querySelector('.section-title').append($('addScene'));story.append(projectTools);projectTools.classList.add('project-tools');
@@ -35,7 +35,7 @@ export function mountGuide(getState){
   const importHelp=document.createElement('div');importHelp.className='guide-tip';importHelp.innerHTML='<strong>Already have a screen recording?</strong><p>Import the actual recording, then add your generated narration and captions. This also works when an embedded browser cannot share a screen.</p><label>Screen recording<input id="sourceFile" type="file" accept="video/mp4,video/webm,video/quicktime"></label><button id="previewClip" class="secondary" hidden>Play / pause source preview</button>';
   capture.append(importHelp);
   const stageHead=document.querySelector('.stage-head'),screen=document.querySelector('.screen'),transport=document.querySelector('.stage>.transport'),hint=document.querySelector('.stage>.hint'),director=document.querySelector('.director');
-  hint.textContent='Capture the app you intend to demonstrate. To demonstrate Demo Studio itself, open a second Demo Studio window and capture that window.';
+  hint.textContent='Capture the app you intend to demonstrate. To demonstrate demoMaker itself, open a second demoMaker window and capture that window.';
   const preview=document.createElement('div');preview.className='guided-preview';preview.append(stageHead,screen);capture.append(preview);
   const framing=document.createElement('details');framing.className='script-details';const framingSummary=document.createElement('summary');framingSummary.textContent='Optional: crop the picture or hide an area';framing.append(framingSummary,panels[2]);capture.append(framing);
   const review=document.createElement('label');review.className='check review-check';review.innerHTML='<input type="checkbox" id="previewChecked"> I checked the preview and it shows only what I want to share.';capture.append(review);
@@ -54,11 +54,11 @@ export function mountGuide(getState){
   const descriptions=['Name your demo and choose the app. Use the example as a starting point, or edit it for another project.','Generate a local American narrator, speak as you record, import a voiceover, or make a silent demo.','Check the source picture, crop, and privacy masks. The finished playback in step 5 shows the final caption layout.','The notes below guide what to do and say. Only the app preview and captions appear in the video.','Your recording is ready. Review it, then save a shareable MP4 to your computer.'];
   const labels=['Story','Narration','App preview','Record','Save video'];
   let step=0,seenBlob=null,wasRecording=false,tourActive=false,tourTimer=null,tourPlaying=false,returnStep=0;
-  const coach=document.createElement('section');coach.className='tour-coach';coach.hidden=true;coach.setAttribute('aria-label','Demo Studio demonstration');
+  const coach=document.createElement('section');coach.className='tour-coach';coach.hidden=true;coach.setAttribute('aria-label','demoMaker demonstration');
   coach.innerHTML='<div><p class="eyebrow" id="tourCount"></p><h2 id="tourTitle"></h2><p id="tourText"></p><p class="tour-label">Live interface tour · no recording or screen permissions</p></div><div class="transport"><button id="tourPrevious" class="secondary">← Previous</button><button id="tourPause" class="secondary">Pause tour</button><button id="tourNext">Next →</button><button id="tourEnd" class="secondary">Exit tour</button></div>';
   guide.insertBefore(coach,guide.firstChild);
   const tourCopy=[
-    ['Plan what you want to show','Here is a real project, already filled in. A scene is a small part of your video: what you do, what you say, and how long it lasts. You can expand the script editor to change it. Your first project is an introduction to Demo Studio.'],
+    ['Plan what you want to show','Here is a real project, already filled in. A scene is a small part of your video: what you do, what you say, and how long it lasts. You can expand the script editor to change it. Your first project is an introduction to demoMaker.'],
     ['Decide how the audience will hear you','Generate a local American voice from your script, then listen to it here. Captions are timed to the generated audio segments. You can also record your microphone or import a voiceover; those modes use your written scene timings.'],
     ['Choose the real application','This is where you select the app tab or window in your browser’s sharing dialog. Its live picture appears below. Check that picture before you continue. The tour leaves the picker disabled; it does not request screen access.'],
     ['Record while following the cues','During a real take, your app stays visible in the preview. The notes tell you what to do, and the narration tells you what to say. Start recording begins the take; Pause lets you wait; Finish ends it. These controls stay disabled in this tour.'],
@@ -93,7 +93,7 @@ export function mountGuide(getState){
     if(state.imported&&step===3){$('stepHeading').textContent='Create your narrated video';$('stepDescription').textContent='The recording is ready. Create the finished preview, then check it before sharing.';}
     $('playback').hidden=!state.result;$('result').hidden=!state.result&&!tourActive;
     for(const id of ['mp4','raw','subtitles'])$(id).disabled=!state.result||tourActive;
-    if(tourActive){$('tourCount').textContent=`DEMO STUDIO IN ACTION · ${step+1} OF 5`;$('tourTitle').textContent=tourCopy[step][0];$('tourText').textContent=tourCopy[step][1];$('tourPrevious').disabled=step===0;$('tourNext').textContent=step===4?'Finish tour →':'Next →';$('tourPause').textContent=tourPlaying?'Pause tour':'Play tour';}
+    if(tourActive){$('tourCount').textContent=`DEMOMAKER IN ACTION · ${step+1} OF 5`;$('tourTitle').textContent=tourCopy[step][0];$('tourText').textContent=tourCopy[step][1];$('tourPrevious').disabled=step===0;$('tourNext').textContent=step===4?'Finish tour →':'Next →';$('tourPause').textContent=tourPlaying?'Pause tour':'Play tour';}
     $('guideBack').hidden=step===0;$('guideBack').disabled=state.busy;
     $('guideNext').hidden=step>=3;$('guideNext').disabled=!canAdvance()||state.busy;
     $('guideNext').textContent=['Continue to narration →','Continue to app preview →','Continue to recording →'][step]||'Continue →';

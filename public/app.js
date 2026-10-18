@@ -4,7 +4,7 @@ import {preset,studioPreset,validateScenes,locateScene,cueList,activeCue,srt,saf
 const $=id=>document.getElementById(id),canvas=$('canvas'),ctx=canvas.getContext('2d');
 let scenes=structuredClone(studioPreset),masks=[],source=null,mic=null,recorder=null,audioContext=null,audioElement=null,sourceVideo=document.createElement('video'),drawTimer=null,recordTimer=null,chunks=[],recording=false,paused=false,started=0,pauseStarted=0,pausedMs=0,elapsed=0,resultBlob=null,resultURL=null,cues=[],recordedCues=[],recordedDuration=0,audioURL=null,converting=false;
 let locked=false,narrationState=null,importedVideo=null,importedURL=null;
-$('projectName').value='Demo Studio introduction';$('appUrl').value=location.origin+'/';
+$('projectName').value='demoMaker introduction';$('appUrl').value=location.origin+'/';
 sourceVideo.muted=true;sourceVideo.playsInline=true;
 const status=text=>{$('status').textContent=text;window.dispatchEvent(new Event('studio-state'));};
 const error=e=>status(e.name==='NotAllowedError'?'Sharing or microphone permission was declined. Choose a source again when ready.':e.message||String(e));

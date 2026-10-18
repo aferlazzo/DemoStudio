@@ -24,7 +24,7 @@ export async function speechReady(){try{
 }catch{return false;}}
 export async function narrate(request){
   if(speechBusy)throw new Error('Narration is already being generated. Please wait.');
-  if(!await speechReady())throw new Error('Piper narration is not installed. Run Setup Narration.cmd in the DemoStudio folder once, then try again.');
+  if(!await speechReady())throw new Error('Piper narration is not installed. Run Setup Narration.cmd in the demoMaker folder once, then try again.');
   const scenes=validateScenes(request.scenes);if(!scenes.some(s=>s.text.trim()))throw new Error('Write a narration script in at least one scene first.');
   speechBusy=true;let dir;
   try{dir=await mkdtemp(join(tmpdir(),'demo-narration-'));const config=JSON.parse((await readFile(join(root,'.local/speech.json'),'utf8')).replace(/^\uFEFF/,''));

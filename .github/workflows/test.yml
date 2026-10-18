@@ -1,4 +1,4 @@
-name: Verify Demo Studio
+name: Verify demoMaker
 on: [push, pull_request]
 permissions:
   contents: read
