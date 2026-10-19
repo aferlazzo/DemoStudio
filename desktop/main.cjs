@@ -20,6 +20,7 @@ app.whenReady().then(async()=>{
   const local=url=>{try{return new URL(url).origin===origin;}catch{return false;}};
   session.defaultSession.setPermissionCheckHandler((wc,permission,requestOrigin)=>wc===mainWindow.webContents&&local(requestOrigin)&&['media','display-capture'].includes(permission));
   session.defaultSession.setPermissionRequestHandler(async(wc,permission,callback)=>{
+    if(wc===mainWindow.webContents&&local(wc.getURL())&&process.env.DEMOMAKER_SMOKE_DIR)return callback(['media','display-capture'].includes(permission));
     if(wc!==mainWindow.webContents||!local(wc.getURL())||permission!=='media')return callback(false);
     const result=await dialog.showMessageBox(mainWindow,{type:'question',buttons:['Allow microphone','Cancel'],defaultId:1,cancelId:1,message:'Allow demoMaker to record your microphone?'});callback(result.response===0);
   });
