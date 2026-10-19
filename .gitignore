@@ -17,3 +17,6 @@ Thumbs.db
 !docs/media/*.mp4
 !docs/media/*.srt
 __pycache__/
+
+dist/
+verification/

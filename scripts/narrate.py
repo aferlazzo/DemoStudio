@@ -1,14 +1,14 @@
 """Generate narration locally. JSON on stdin; assets stay in the requested job folder."""
-import sys, json, re, wave
+import sys, json, re, wave, os
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
-local = root / '.local'
+local = Path(os.environ.get('DEMOMAKER_SPEECH_ROOT', root / '.local'))
 config_path = local / 'speech.json'
 if config_path.exists():
     config = json.loads(config_path.read_text(encoding='utf-8-sig'))
     if config.get('packages'):
-        sys.path.insert(0, config['packages'])
+        sys.path.insert(0, str(local / config['packages']))
 sys.path.insert(0, str(local / 'piper-packages'))
 
 def main():

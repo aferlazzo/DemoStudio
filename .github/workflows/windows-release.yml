@@ -1,0 +1,41 @@
+name: Windows desktop installer
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['docs/**', '*.md']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: ./scripts/bundle-speech.ps1
+      - run: npm test
+      - run: npm run test:piper
+      - run: npm run dist:win
+      - run: ./scripts/test-installed.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-verification
+          path: |
+            dist/*.exe
+            verification/**
+      - name: Publish tested installer and examples
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $version=(Get-Content package.json | ConvertFrom-Json).version
+          gh release create "v$version" "dist/demoMaker-Setup-$version.exe" verification/standard.mp4 verification/reel.mp4 verification/installed-report.json --title "demoMaker $version — Windows desktop and Reels" --notes "Windows x64 installer with bundled Piper narration and FFmpeg. Installed desktop shortcut, offline narration, both H.264/AAC exports and uninstall checked on GitHub Windows runner with development tools removed from PATH. Unsigned: Windows SmartScreen may prompt. Manual upload only. See WINDOWS.md for instructions and verification limits."

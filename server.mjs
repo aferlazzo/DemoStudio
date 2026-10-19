@@ -1,15 +1,14 @@
-import {readBody,narrate,renderMovie,speechReady,runProcess} from './media.mjs';
+import {ffmpeg,readBody,narrate,renderMovie,speechReady,runProcess} from './media.mjs';
 import http from 'node:http';
 import {readFile, mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-import ffmpeg from 'ffmpeg-static';
 const root=join(dirname(fileURLToPath(import.meta.url)),'public');
-const port=Number(process.env.PORT||4317);
+let port=Number(process.env.PORT??4317);
 const allowed=new Map([['/','index.html'],['/app.js','app.js'],['/core.js','core.js'],['/guide.js','guide.js'],['/narration.js','narration.js'],['/style.css','style.css']]);
-const server=http.createServer(async(req,res)=>{
+export const server=http.createServer(async(req,res)=>{
   const origin=`http://127.0.0.1:${port}`;
   res.setHeader('X-Content-Type-Options','nosniff');
   if(req.headers.host!==`127.0.0.1:${port}`&&req.headers.host!==`localhost:${port}`){res.writeHead(403);res.end('Local access only');return;}
@@ -58,6 +57,7 @@ const server=http.createServer(async(req,res)=>{
   try{const file=allowed.get(req.url);const type=file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html';res.writeHead(200,{'Content-Type':type+'; charset=utf-8','Cache-Control':'no-store'});res.end(await readFile(join(root,file)));}catch{res.writeHead(500);res.end('Unable to load file');}
 });
 server.listen(port,'127.0.0.1',()=>{
+  port=server.address().port;
   const url=`http://127.0.0.1:${port}`;
   console.log(`demoMaker: ${url}`);
   if(process.argv.includes('--open')&&process.platform==='win32'){

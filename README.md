@@ -1,3 +1,7 @@
+# Windows desktop and Reels
+
+Windows packaging and social video export are in development for version 1.3.0. See [WINDOWS.md](WINDOWS.md) for usage and verification boundaries. Only a successful Windows release workflow establishes installer verification.
+
 # demoMaker
 
 Formerly DemoStudio. Existing project files, launcher, and released video filenames remain compatible. Earlier demonstration footage uses the original name.

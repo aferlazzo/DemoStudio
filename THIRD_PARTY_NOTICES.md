@@ -12,3 +12,6 @@ Setup obtains dependencies from upstream distributions. Model weights, Python pa
 - [ffmpeg-static](https://github.com/eugeneware/ffmpeg-static), 5.2.0: GPL-3.0-or-later package. Installs an upstream executable. FFmpeg licensing depends on build configuration; inspect `ffmpeg -L` and upstream notices before redistributing a packaged runtime.
 
 This repository distributes app source and finished example MP4s, not an installer bundling these runtimes. Future runtime packaging must retain applicable licenses, notices, and source obligations.
+
+
+Windows desktop packages also include Electron (MIT and Chromium notices), embedded CPython (PSF license), Piper and its dependencies (see bundled dist-info license files), FFmpeg (GPL build from ffmpeg-static), and the LJ Speech voice model (bundled MODEL_CARD). The full dependency notices ship with their runtime files. FFmpeg source/build instructions: https://github.com/eugeneware/ffmpeg-static and https://ffmpeg.org/download.html . Electron: https://github.com/electron/electron . CPython: https://www.python.org/downloads/source/ .
