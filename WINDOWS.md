@@ -1,6 +1,6 @@
 # demoMaker for Windows 11
 
-Download `demoMaker-Setup-1.3.1.exe` from the GitHub release. Run it, choose the installation folder, and finish. Start **demoMaker** from the desktop icon or Start menu. No development tools, terminal, or separate browser are needed. The x64 installer contains Electron/Node, FFmpeg, embedded Python, Piper, and the American English voice. Narration works without an internet connection after installation.
+Download `demoMaker-Setup-1.3.2.exe` from the GitHub release. Run it, choose the installation folder, and finish. Start **demoMaker** from the desktop icon or Start menu. No development tools, terminal, or separate browser are needed. The x64 installer contains Electron/Node, FFmpeg, embedded Python, Piper, and the American English voice. Narration works without an internet connection after installation.
 
 The installer is unsigned. Windows may display a SmartScreen reputation warning. Only use the release linked from this repository.
 

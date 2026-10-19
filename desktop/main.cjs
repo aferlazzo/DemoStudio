@@ -15,7 +15,7 @@ app.whenReady().then(async()=>{
   ({server}=await import('../server.mjs'));
   if(!server.listening)await new Promise((resolve,reject)=>{server.once('listening',resolve);server.once('error',reject);});
   origin=`http://127.0.0.1:${server.address().port}`;
-  mainWindow=new BrowserWindow({width:1400,height:960,minWidth:900,minHeight:650,title:'demoMaker',webPreferences:{contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});
+  mainWindow=new BrowserWindow({width:1400,height:960,minWidth:900,minHeight:650,title:'demoMaker',icon:path.join(__dirname,'icon.png'),webPreferences:{contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false}});
   mainWindow.setMenuBarVisibility(false);
   const local=url=>{try{return new URL(url).origin===origin;}catch{return false;}};
   session.defaultSession.setPermissionCheckHandler((wc,permission,requestOrigin)=>wc===mainWindow.webContents&&local(requestOrigin)&&['media','display-capture'].includes(permission));
@@ -32,6 +32,7 @@ app.whenReady().then(async()=>{
   ipcMain.on('capture:select',(event,id)=>{if(event.sender===picker?.webContents){picker.selectedSource=selection?.find(s=>s.id===id);picker.close();}});
   session.defaultSession.setDisplayMediaRequestHandler((request,callback)=>{
     if(!local(request.securityOrigin)||picker)return callback({});
+    if(process.env.DEMOMAKER_SMOKE_DIR){desktopCapturer.getSources({types:['screen','window']}).then(sources=>callback(sources.length?{video:sources[0]}:{})).catch(()=>callback({}));return;}
     picker=new BrowserWindow({parent:mainWindow,modal:true,width:850,height:650,title:'Choose a screen — demoMaker',webPreferences:{preload:path.join(__dirname,'picker-preload.cjs'),nodeIntegration:false,contextIsolation:true,sandbox:true}});
     picker.setMenuBarVisibility(false);
     picker.on('closed',()=>{const source=picker.selectedSource;picker=null;selection=null;callback(source?{video:source,...(request.audioRequested?{audio:'loopback'}:{})}:{});});
