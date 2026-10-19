@@ -2,6 +2,7 @@
 exports.run=async(window,origin,folder)=>{
   const fs=require('node:fs/promises'),path=require('node:path');
   const {ffmpeg,runProcess}=await import('../media.mjs');
+  await window.webContents.executeJavaScript(`new Promise((resolve,reject)=>{const started=Date.now();const timer=setInterval(()=>{if(document.getElementById('guideNext')){clearInterval(timer);resolve(true);}else if(Date.now()-started>15000){clearInterval(timer);reject(Error('Guided interface did not finish loading'));}},50);})`);
   const ui=await window.webContents.executeJavaScript(`({title:document.title,format:!!document.getElementById('exportFormat'),guided:!!document.getElementById('guideNext'),capture:typeof navigator.mediaDevices.getDisplayMedia})`);
   if(!ui.format||!ui.guided||ui.capture!=='function')throw Error('Installed user interface did not initialize');
   // Exercise a real Windows desktop capture, including Chromium's permission API.
