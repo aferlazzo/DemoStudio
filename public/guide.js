@@ -24,6 +24,7 @@ export function mountGuide(getState){
   const story=$('stepStory'),sound=$('stepSound'),capture=$('stepCapture'),record=$('stepRecord'),exportPage=$('stepExport');
   story.append(panels[0]);
   const options=document.createElement('details');options.className='script-details';const optionsSummary=document.createElement('summary');optionsSummary.textContent='Optional: recording length and picture size';options.append(optionsSummary,panels[0].querySelector('.row'));panels[0].append(options);
+  const formatLabel=$('exportFormat').parentElement,formatHint=formatLabel.nextElementSibling;panels[0].insertBefore(formatLabel,options);panels[0].insertBefore(formatHint,options);
   const explainer=document.createElement('div');explainer.className='guide-tip';explainer.innerHTML='<strong>New here? Watch the finished example first.</strong><p>Choose <b>Watch demoMaker in action</b> above to see a real project become a narrated MP4. Then give your own video a name and app address below. The SoHelpMe example supplies a starting script; review it against your app’s actual responses.</p><p id="storySummary"></p>';
   story.prepend(explainer);
   const script=document.querySelector('.script'),details=document.createElement('details');details.className='script-details';const summary=document.createElement('summary');summary.textContent='Review or edit the narration and scene timing';details.append(summary,script);story.append(details);

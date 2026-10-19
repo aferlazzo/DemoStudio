@@ -17,8 +17,7 @@ exports.run=async(window,origin,folder)=>{
     const form=new FormData();form.append('video',new Blob([video]),'capture.webm');form.append('audio',new Blob([audio]),'voice.wav');form.append('project',JSON.stringify({duration:narration.duration,cues:narration.cues,format,captions:true,fade:true}));
     const response=await fetch(origin+'/render',{method:'POST',headers:{Origin:origin},body:form});if(!response.ok)throw Error(await response.text());
     const file=path.join(folder,format+'.mp4');await fs.writeFile(file,Buffer.from(await response.arrayBuffer()));
-    const metadata=await runProcess(ffmpeg,['-hide_banner','-i',file,'-f','null','-']);
-    // runProcess returns stdout; inspect metadata using ffmpeg's progress on stdout instead.
+    await runProcess(ffmpeg,['-hide_banner','-i',file,'-f','null','-']);
     await runProcess(ffmpeg,['-v','error','-i',file,'-frames:v','1','-y',path.join(folder,format+'.png')]);
     report.exports.push({format,file,bytes:(await fs.stat(file)).size,decoded:true});
   }

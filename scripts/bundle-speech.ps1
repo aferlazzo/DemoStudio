@@ -12,3 +12,10 @@ if($LASTEXITCODE -ne 0){throw 'Piper dependencies failed to install'}
 if($LASTEXITCODE -ne 0){throw 'Piper voice download failed'}
 @{engine='piper';python='python/python.exe';packages='piper-packages'} | ConvertTo-Json | Set-Content "$local/speech.json" -Encoding utf8
 Invoke-WebRequest 'https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ljspeech/high/MODEL_CARD' -OutFile "$local/piper-voices/MODEL_CARD"
+
+# App-local Microsoft runtime DLLs avoid relying on a developer VC runtime installation.
+foreach($dll in @('vcruntime140.dll','vcruntime140_1.dll','msvcp140.dll')){
+  $file=Join-Path $env:SystemRoot "System32/$dll"
+  if(!(Test-Path $file)){throw "Missing required redistributable $dll"}
+  Copy-Item $file "$local/python/$dll" -Force
+}
